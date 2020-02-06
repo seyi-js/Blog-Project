@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link rel="stylesheet" type="text/css" href="static/css/styles.css">
+		<title>
+			Blog
+		</title>
+	</head>
+	<body>
+		<section class="post">
+							<% for(var i= 0; i < posts.length; i++) { %>
+							<div class='post-element'>
+							<h1 class="post-title" id="<%=i%>"> <%- posts[i].title %></h1>
+								<p id="<%=i%>"> <%- posts[i].post %></p>
+							</div>
+							<% } %>
+		</section>
+	</body>
+</html>
