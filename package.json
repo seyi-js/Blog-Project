@@ -1,0 +1,53 @@
+{
+  "name": "blog-project",
+  "version": "1.0.0",
+  "description": "This is a personal project. A blogging app that allows the administrator to post articles written in HTML and css tags while been displayed to the users as a normal webpage.",
+  "main": "app.js",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.4",
+    "connect-ensure-authenticated": "^1.0.8",
+    "ejs": "^3.0.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-ejs-layouts": "^2.5.0",
+    "express-session": "^1.17.0",
+    "express-messages": "^1.0.1",
+    "express-validator": "^5.3.1",
+    "forever": "^2.0.0",
+    "forever-monitor": "^2.0.0",
+    "formidable": "^1.2.1",
+    "jsonwebtoken": "^8.5.1",
+    "local": "^0.3.3",
+    "mongoose": "^5.8.4",
+    "mongodb-autoincrement": "^1.0.1",
+    "multer": "^1.4.2",
+    "morgan": "^1.9.1",
+    "nodemon": "^2.0.2",
+    "nodemailer": "^6.4.2",
+    "nohup": "^0.1.0",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "passport-http": "^0.3.0",
+    "shortid": "^2.2.15",
+    "upper-case": "^2.0.1",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev" : "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seyi-js/Blog-Project.git"
+  },
+  "author": "ADEBAYO SAMUEL OLUWASEYI",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/seyi-js/Blog-Project/issues"
+  },
+  "homepage": "https://github.com/seyi-js/Blog-Project#readme"
+}
