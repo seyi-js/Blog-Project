@@ -51,7 +51,7 @@ router.post("/login", (req, res, next) => {
 });
 
 
-//Logtout Route
+//Logout Route
 router.get("/logout", (req, res) => {
   req.logout();
   // req.flash("success_msg", "You are now logged Out");
@@ -146,8 +146,8 @@ router.post('/post', (req, res) => {
   var post =req.body.post;
   var title =req.body.title;
   var errors = [];
-  console.log(title)
-  console.log(post)
+  // console.log(title)
+  // console.log(post)
   if(!title || !post) {
     res.redirect('/admin/dashboard')
   }
@@ -180,6 +180,61 @@ router.post('/post', (req, res) => {
 });
 
 
+//Edit Route
+
+router.get('/edit', (req, res) => {
+  var id = req.query.post;
+  Post.find({}, (err, result) => {
+    if(err) throw err;
+    else {
+      var posts = result[id];
+      // var postId = post.id;
+      // var query = {_id: postId};
+      // console.log(post)
+      res.render('edit', {
+        title: posts.title,
+        post: posts.post,
+        id : posts._id
+       // console.log(post)
+      })
+    }
+  })
+});
+router.post('/update', (req, res) => {
+  var id = req.query.id;
+  var title = req.body.title;
+  var post = req.body.post;
+  var errors = [];
+  if(!title || !post) {
+    res.redirect('/admin/dashboard')
+  } else{
+      // var posts = result[id];
+      // console.log(posts)
+      var newvalues = {
+        title: req.body.title,
+        post: req.body.post
+      };
+      var myquery = { _id: id };
+              var newItem = {
+                $set: {post: req.body.post,
+                       title: req.body.title},
+                $currentDate: { lastModified: true }
+              };
+
+              // console.log(newvalues)
+              // console.log(newItem)
+              Post.updateOne(myquery, newItem, function(
+                err,
+                res
+              ) {
+                if (err) throw err;
+                // console.log("1 document updated");
+
+              });
+   }res.redirect('/admin/dashboard')
+
+})
+
 //Delete Route
 
 router.get('/delete', (req, res) => {
@@ -190,7 +245,7 @@ router.get('/delete', (req, res) => {
     (err, result) => {
         if (err) throw err;
         else {
-          // Using this to access array index equal to the deleted id
+          // Using this to access array index equal to the clicked id
           var post = result[id]
           //this has nothing to do with post_id
           //Using this to access the already got index Id

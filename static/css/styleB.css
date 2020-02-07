@@ -1,0 +1,101 @@
+
+
+/* For Laptop sized screens*/
+
+html {
+	padding: 0px;
+	margin:0px;
+	background-color:white;
+	background: url(/static/img/Penguins.jpg) no-repeat center fixed;
+    background-size: cover;
+}
+body {
+	padding: 0px;
+	margin:0px;
+}
+
+
+
+/* Header/navigation bar*/
+header {
+	background:transparent;
+	height: 70px;
+	padding-top: 2px;
+	/*float: right;*/
+}
+header li  {
+	color:white;
+	display: inline;
+	margin:5px;
+	padding: 5px;
+	list-style: none;
+	border-left-style: solid;
+	border-left-width: 2px;
+	border-left-color: aqua;
+	border-bottom-style: solid;
+	border-bottom-width: 2px;
+	border-bottom-color: aqua;
+	float: right;
+}
+
+header li:hover {
+	background-color: grey;
+}
+
+header li a {
+	color:white;
+	text-decoration: none;
+}
+
+
+
+/*Form Section */
+
+section.form-section {
+	background-color:;
+}
+
+section.form-section form {
+	display:flex;
+	flex-direction: column;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+section.form-section form input {
+	height: 20px;
+	background:transparent;
+	border-radius: 5px;
+}
+
+section.form-section form input:hover {
+	border-color: black;
+}
+
+
+section.form-section form textarea {
+	height: 400px;
+	/*width:1323px;*/
+	color:blue;
+	font-size: 20px;
+	background: transparent;
+	border-radius:5px;
+	max-height: 400px;
+	max-width:1323px;
+}
+
+section.form-section form button {
+	width:100px;
+	height: 30px;
+	margin:0 auto;
+	margin-top:10px;
+	margin-bottom:10px;
+	border-radius:5px;
+	font-size: 20px;
+	background:transparent;
+	color:white;
+}
+
+section.form-section form button:hover {
+	background-color: grey;
+}
