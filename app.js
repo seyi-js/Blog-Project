@@ -13,7 +13,7 @@ var session = require("express-session");
 const passport = require('passport');
 const mongoose =  require('mongoose');
 const MongoStore = require('connect-mongo')(session)
-const PORT = process.env.PORT || 30;
+const PORT = process.env.PORT || 5000;
 const url = 'mongodb://localhost:27017/blogDB';
 mongoose.set('useCreateIndex', true);
 mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true});
