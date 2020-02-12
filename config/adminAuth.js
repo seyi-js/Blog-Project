@@ -7,7 +7,7 @@ if(req.isAuthenticated()) {
    
 }else{
     // req.flash('error_msg', 'Please log In to view this resource');
-    res.redirect('/admin/login')
+    res.redirect('/users/login')
         }
 }
 

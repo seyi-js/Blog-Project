@@ -6,7 +6,7 @@ html {
 	/*background-color:white;*/
 	background: url(/static/img/Tulips.jpg) no-repeat center fixed;
     background-size: cover;
-},
+}
 
 body {
 	padding: 0px;
@@ -42,4 +42,53 @@ section.post button {
 	border-color: black;
 	border-radius: 5px;
 	padding:2px 10px 2px 10px;
+}
+
+/*Form Section */
+
+section.post form {
+	display:flex;
+	flex-direction: column;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+section.post form input {
+	height: 20px;
+	background:transparent;
+	border-radius: 5px;
+}
+
+section.post form input:hover {
+	border-color: black;
+}
+
+
+section.post form textarea {
+	min-height: 80px;
+	min-width: 150px;
+	/*width:1323px;*/
+	color:black;
+	font-family: san-seriff;
+	font-size: 16px;
+	background: transparent;
+	border-radius:5px;
+	max-height: 80px;
+	max-width:150px;
+}
+
+section.form-section form button {
+	width:100px;
+	height: 30px;
+	margin:0 auto;
+	margin-top:10px;
+	margin-bottom:10px;
+	border-radius:5px;
+	font-size: 20px;
+	background:transparent;
+	color:white;
+}
+
+section.form-section form button:hover {
+	background-color: grey;
 }

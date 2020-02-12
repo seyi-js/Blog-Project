@@ -1,52 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-    <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Login</title>
-    </head>
-    <body class= "login-body">
 
-        <div class="card card-body" id= "login-body">
-            <h1 class="text-center mb-3"><i class="fa fa-sign-in-alt"></i>Login</h1>
-            
-            <form action="/admin/login" method="POST">
-            
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="/static/css/css/fontawesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/css/brands.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/css/fontawesome.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/css/regular.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/css/solid.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/css/svg-with-js.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/css/svg-with-js.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/css/regular.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/css/solid.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/css/v4-shims.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/css/v4-shims.css">
+    <title>Login</title>
+</head>
+
+<body class="login-body">
+
+    <div class="card card-body" id="login-body">
+        <h1 class="text-center mb-3"><i class="fa fa-sign-in-alt"></i>Login</h1>
+
+        <form action="/admin/login" method="POST">
+
             <div class="form-group">
                 <label for="username">username</label>
-                <input 
-                    type="username"
-                    id="username"
-                    name="username"
-                    class="form-control"
-                    placeholder="Enter username"
-                />
+                <input type="username" id="username" name="username" class="form-control"
+                    placeholder="Enter username" />
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input 
-                 type="password"
-                id="password"
-                name="password"
-                class="form-control"
-                placeholder="Enter Password"
-                 />
-             </div>
+                <input type="password" id="password" name="password" class="form-control"
+                    placeholder="Enter Password" />
+            </div>
             <div>
-            <button type="submit" class="btn">Login</button>
-            </form>
-             <p class="lead mt-4">No Account? <a href="/admin/register">Register</a></p>
-            <!-- <p class="lead mt-4">Forgot password<a href="/users/f_password">Here</a></p> -->
-             </div>
-        </div>
-    </body>
+                <button type="submit" class="btn">Login</button>
+        </form>
+        <p class="lead mt-4">No Account? <a href="/admin/register">Register</a></p>
+        <!-- <p class="lead mt-4">Forgot password<a href="/users/f_password">Here</a></p> -->
+    </div>
+    </div>
+</body>
+
 </html>
-
-
-
-
-
-
-
-

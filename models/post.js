@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
-
+var ObjectId = mongoose.Schema.Types.ObjectId;
+// Post model
 var postSchema = new mongoose.Schema({
  post_id : {
     type: Number,
@@ -12,10 +13,15 @@ var postSchema = new mongoose.Schema({
  post: {
     type : String,
     required: true
-}
+},
+comments: [{
+	type: ObjectId,
+	ref: 'comments'/*the colection i'm linking to*/
+}]
 
 });
 
 
-const Post = mongoose.model('Post', postSchema, 'posts'/*<=collection name*/);
-module.exports = Post
+    const    Post = mongoose.model('posts',/*collection name */ postSchema);
+      module.exports = Post;
+     

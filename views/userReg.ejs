@@ -6,18 +6,31 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Register</title>
+<link rel="stylesheet" type="text/css" href="/static/css/css/fontawesome.min.css">
+<link rel="stylesheet" type="text/css" href="/static/css/css/brands.css">
+<link rel="stylesheet" type="text/css" href="/static/css/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/static/css/css/fontawesome.css">
+<link rel="stylesheet" type="text/css" href="/static/css/css/regular.min.css">
+<link rel="stylesheet" type="text/css" href="/static/css/css/solid.min.css">
+<link rel="stylesheet" type="text/css" href="/static/css/css/svg-with-js.min.css">
+<link rel="stylesheet" type="text/css" href="/static/css/css/svg-with-js.min.css">
+<link rel="stylesheet" type="text/css" href="/static/css/css/regular.css">
+<link rel="stylesheet" type="text/css" href="/static/css/css/solid.css">
+<link rel="stylesheet" type="text/css" href="/static/css/css/v4-shims.min.css">
+<link rel="stylesheet" type="text/css" href="/static/css/css/v4-shims.css">
+<link rel="stylsheet" type="text/css" href="/static/css/bootstrap.min.css">
 </head>
 <body>
 <div class="row mt-5">
     <div class="col-md-6 n-auto">
         <div class="card card-body">
             <h1 class="text-center mb-3"><i class="fa fa-user-plus"></i>Register</h1>
-                            
-            <form action="/admin/register" method="POST">
+            <%- include ("./partials/messages") %>
+            <form action="/users/register" method="POST"  enctype= "multipart/form-data">
                 <div class="form-group">
-                    <label for="username">username</label>
-                    <input type="username" id="name" name="username" class="form-control" placeholder="Enter username"
-                        value="<%= typeof usernmae != 'undefined' ? username : '' %>" />
+                    <label for="name">Name</label>
+                    <input type="name" id="name" name="name" class="form-control" placeholder="Enter Name"
+                        value="<%= typeof name != 'undefined' ? name : '' %>" />
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
@@ -27,11 +40,11 @@
                 <label for="name">Contact</label>
                 <input type="contact" id="contact" name="contact" class="form-control" placeholder="Enter Phone No."
                     value="<%= typeof contact != 'undefined' ? contact : '' %>" />
-                   <!--  <div class="form-group">
+                    <div class="form-group">
                         <label for="ProfileImage">Profile Image</label>
                         <input type="file" id="ProfileImage" name="ProfileImage" class="form-control"
                             value="<%= typeof name != 'undefined' ? name : '' %>" />
-                    </div> -->
+                    </div>
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" id="password" name="password" class="form-control"
@@ -46,7 +59,7 @@
                     Register
                 </button>
             </form>
-            <p class="lead mt-4">Have An Account? <a href="/admin/login">Login</a></p>
+            <p class="lead mt-4">Have An Account? <a href="/users/login">Login</a></p>
         </div>
     </div>
 </div>

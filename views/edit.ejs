@@ -1,39 +1,39 @@
-
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta http-equiv="X-UA-Compatible" content="ie=edge">
-		<link rel="stylesheet" type="text/css" href="/static/css/styleB.css">
-		<!-- <script -->
-			<!-- src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script> -->
-		<title>BLOG PROJECT</title>
-	</head>
-	<body>
-		<header class="navigation-bar">
-			<ul>
-				<li>
-					<a href="/admin/logout"> Logout</a>
-				</li>
-				<li>
-					<a href="/" target="_blank">Users</a>
-				</li>
-			</ul>
-		</header>
-		<section class="form-section">
-								<form action= '/admin/update?id=<%=id%>' method='POST'>
-									<label for="title">Title</label>
-									<input type="text" id="title" name="title" class="form-control"
-										placeholder="Enter Title"
-										value="<%-title%>" />
-									<label for="">Post</label>
-									<textarea id="yourTextArea" name="post" > <%-post%></textarea>
-									<button type="submit" class="button" onClick="return confirm ('Are you sure you want to submit') ">
-										Post
-									</button>
 
-								</form>
-		</section>
-	</body>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<link rel="stylesheet" type="text/css" href="/static/css/styleB.css" />
+	<!-- <script -->
+	<!-- src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script> -->
+	<title>BLOG PROJECT</title>
+</head>
+
+<body>
+	<header class="navigation-bar">
+		<ul>
+			<li>
+				<a href="/admin/logout"> Logout</a>
+			</li>
+			<li>
+				<a href="/" target="_blank">Users</a>
+			</li>
+		</ul>
+	</header>
+	<section class="form-section">
+		<form action="/admin/update?id=<%=id%>" method="POST">
+			<label for="title">Title</label>
+			<input type="text" id="title" name="title" class="form-control" placeholder="Enter Title"
+				value="<%-title%>" />
+			<label for="">Post</label>
+			<textarea id="yourTextArea" name="post"> <%-post%></textarea>
+			<button type="submit" class="button" onClick="return confirm ('Are you sure you want to submit') ">
+				Post
+			</button>
+		</form>
+	</section>
+</body>
+
 </html>

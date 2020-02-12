@@ -9,7 +9,7 @@ const Admin = require("../models/admin");
 
 const global=require('../global');
 
-global.info['name']='passport.js';
+global.info['name']='adminPassport.js';
 
 module.exports = passport =>{
   passport.use(
@@ -19,7 +19,7 @@ module.exports = passport =>{
         .then(user => {
           if (!user) {
             return done(null, false, {
-              // message: "Incorrect username or  Password"
+              message: "Incorrect Email or  Password"
             });
           }
           // Match password
@@ -30,7 +30,7 @@ module.exports = passport =>{
               return done(null, user);
             } else {
               return done(null, false, {
-                // message: "Incorrect username or  Password"
+                message: "Incorrect Email or  Password"
               });
             }
           });

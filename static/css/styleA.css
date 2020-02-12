@@ -76,10 +76,6 @@ section.post button {
 
 /*Form Section */
 
-section.form-section {
-	background-color:;
-}
-
 section.form-section form {
 	display:flex;
 	flex-direction: column;
@@ -91,18 +87,24 @@ section.form-section form input {
 	height: 20px;
 	background:transparent;
 	border-radius: 5px;
+	color: grey;
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 section.form-section form input:hover {
 	border-color: black;
 }
 
+section.form-section form textarea:hover {
+	border-color: black;
+}
 
 section.form-section form textarea {
 	height: 400px;
 	/*width:1323px;*/
-	color:blue;
-	font-size: 20px;
+	color:grey;
+	font-size: 18px;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 	background: transparent;
 	border-radius:5px;
 	max-height: 400px;
