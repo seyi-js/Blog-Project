@@ -10,20 +10,23 @@ const upload = multer({ dest: "./static/img/uploads" });
 const path = require('path')
 const flash = require("connect-flash");
 var session = require("express-session");
-const passport = require('passport');
 const mongoose =  require('mongoose');
 const MongoStore = require('connect-mongo')(session)
-const PORT = process.env.PORT || 5000;
-const url = 'mongodb://localhost:27017/blogDB';
+const PORT = process.env.PORT || 80;
 mongoose.set('useCreateIndex', true);
-mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true});
-const db = mongoose.connection;
-db.on('error', console.log.bind(console, 'connection error'));
-db.once('open', (callback) => {
-	console.log('Connection to blogDB Established....')
+const url = 'mongodb://localhost:27017/blogDB';
+// const url = process.env.MONGO_URL
+// // const uri = ""
+// //const uri = process.env.ATLAS_URI;
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
+var db = mongoose.connection;
+db.on("error", console.log.bind(console, "connection error"));
+db.once("open", function(callback) {
+    console.log("MongoDB Connected...");
 });
 
 
+//Process .env config
 dotenv.config();
 // comment model
 const Comment = require("./models/comment");
@@ -36,37 +39,34 @@ const User = require("./models/users");
 
 //Cookie Parser
 app.use(cookieParser());
+//BODY PARSER CONFIG
+app.use(bodyParser.urlencoded({extended: false}));
 
 const IN_PROD = process.env.NODE_ENV === 'production'
 //Express Session
 app.use(session({
     name:process.env.SESSION_NAME,
-    resave: false,
+    resave: true,
     saveUninitialized: false,
     secret: process.env.SESSION_SECRET,
     store: new MongoStore({
         mongooseConnection: db
     }),
     cookie: {
-        maxAge:1000 * 60 * 60 * 2,
-        originalMaxAge: 1000 * 60 * 60 * 2,
+        maxAge:1000 * 60 * 60,//Expires in an hour
+        originalMaxAge: 1000 * 60 * 60,//Expires in an hour
         sameSite: true,
         secure: IN_PROD
     }
         })
     );
-// passport
-app.use(passport.initialize());
-app.use(passport.session());
-
 // connect-flash
 app.use(flash());
 
 // User model
 const Admin = require("./models/admin");
 
-//BODY PARSER CONFIG
-app.use(bodyParser.urlencoded({extended: false}));
+
 
 // Global Vars
 app.use((req, res, next) => {
@@ -92,20 +92,11 @@ app.use('/', require('./routes/index'));
 app.use("/admin", require("./routes/admin"));
 
 
+//Catch all other route
 
-
-// const blogpost= Post.findOne({'_id': "5e3acf566dca6e36acefc2f2"}).populate('comments');
-
-// const commentIds = blogpost;
-
-// console.log(commentIds)
-
-
-
-// Post.findOne({'comments' :"5e402d3b18717cc2027b1a7f" }).populate('comments').exec((err, person) => {
-//     if(err) throw err;
-//     console.log(person)
-// })
+app.get("*", (req, res) => {
+    res.send("<h1>error 404 Page not Found</h1>");
+  });
 
 
 

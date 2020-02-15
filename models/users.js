@@ -1,8 +1,20 @@
 var mongoose = require('mongoose');
 var userSchema = new mongoose.Schema({
-    name: {
+    firstname: {
         type: String,
         required: true
+    },
+    lastname: {
+        type: String,
+        required: true
+    },
+    dob: {
+        type: String,
+        // required: true
+    },
+    gender: {
+        type: String,
+        // required: true
     },
     email: {
         type: String,
@@ -19,7 +31,7 @@ var userSchema = new mongoose.Schema({
         default: new Date().toLocaleString()
     },
     contact: {
-        type: String,
+        type: Number,
         required: true
     },
     profileimage: {

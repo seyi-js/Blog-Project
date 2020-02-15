@@ -11,6 +11,7 @@
     </title>
   </head>
   <body>
+    <%- include ("./partials/messages") %>
     <header class="navigation-bar">
       <ul>
         <li>
@@ -24,7 +25,7 @@
       <div class="post-element">
         <h1 class="post-title" id="<%=i%>"><%- posts[i].title %></h1>
         <article id="<%=i%>"><%- posts[i].post %></article>
-        <li id="<%=i%>"><%= posts[i].comments %></li>
+        <li id="<%=i%>"><%= posts[i].comments[0] %></li>
         <form action="/comment?id=<%=posts[i]._id%>" method="POST">
           <label for="">comment</label>
           <textarea
