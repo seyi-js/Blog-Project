@@ -15,7 +15,7 @@ const MongoStore = require('connect-mongo')(session)
 const PORT = process.env.PORT || 80;
 mongoose.set('useCreateIndex', true);
 // const uri = 'mongodb+srv://samuelseyi:OLUWASEYI50886@cluster0-ss5ul.mongodb.net/test?retryWrites=true&w=majority'
-const url =  'mongodb://localhost:27017/blogDB';
+// const url =  'mongodb://localhost:27017/blogDB';
 const uri = 'mongodb+srv://samuel:OLUWASEYI@cluster0-ss5ul.mongodb.net/test?retryWrites=true&w=majority'
 // const url = process.env.MONGO_URL
 // // const uri = ""
@@ -48,7 +48,7 @@ const IN_PROD = process.env.NODE_ENV === 'production'
 //Express Session
 app.use(session({
     name:process.env.SESSION_NAME,
-    resave: true,
+    resave: false,
     saveUninitialized: false,
     secret: process.env.SESSION_SECRET,
     store: new MongoStore({
