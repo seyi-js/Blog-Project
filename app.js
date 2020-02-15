@@ -14,11 +14,13 @@ const mongoose =  require('mongoose');
 const MongoStore = require('connect-mongo')(session)
 const PORT = process.env.PORT || 80;
 mongoose.set('useCreateIndex', true);
-const url = 'mongodb+srv://samuelseyi:OLUWASEYI50886@cluster0-ss5ul.mongodb.net/test?retryWrites=true&w=majority';
+// const uri = 'mongodb+srv://samuelseyi:OLUWASEYI50886@cluster0-ss5ul.mongodb.net/test?retryWrites=true&w=majority'
+const url =  'mongodb://localhost:27017/blogDB';
+const uri = 'mongodb+srv://samuel:OLUWASEYI@cluster0-ss5ul.mongodb.net/test?retryWrites=true&w=majority'
 // const url = process.env.MONGO_URL
 // // const uri = ""
 // //const uri = process.env.ATLAS_URI;
-mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 var db = mongoose.connection;
 db.on("error", console.log.bind(console, "connection error"));
 db.once("open", function(callback) {
