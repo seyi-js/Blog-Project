@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 80;
 mongoose.set('useCreateIndex', true);
 //Switching between url in production and dev
 let url;
-if (process.env.NODE_ENV == 'production') {
+if (process.env.NODE_ENV !== 'production') {
     url = 'mongodb://localhost:process.env.MONG0_URL/blogDB';
 } else {
 
