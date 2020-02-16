@@ -309,7 +309,7 @@ router.get("/",  (req, res) => {
 // var testing = posts[0].comments;
 // console.log(testing[0].comment)
         res.render("users", { posts: posts,
-                              userId: req.session.userId});
+                              userId: req.session});
       }
     });
 });

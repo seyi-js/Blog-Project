@@ -45,9 +45,9 @@ app.use(session({
     resave: true,
     saveUninitialized: true,
     secret: process.env.SESSION_SECRET,
-    // store: new MongoStore({
-    //     mongooseConnection: db
-    // }),
+    store: new MongoStore({
+        mongooseConnection: db
+    }),
     cookie: {
         maxAge: 1000 * 60 * 60 * 24,//Expires in 24hours
         originalMaxAge: 1000 * 60 * 60 * 24,//Expires in 24hours
