@@ -32,8 +32,21 @@ const redirectHome = (req, res, next) => {
     next();
   }
 };
-
-
+//fOR FINDING USERS BY ID
+let userdata;
+const findById= (req,res, next) =>{
+  var userId = req.query.userId;
+  User.findOne({_id: userId}, (err, user) =>{
+    if(err){
+      req.flash('error_msg', 'Problem submiting comment');
+      res.redirect('/')
+    }
+    else{
+      userdata = user;
+      next();
+    }
+  })
+}
 
 //User Dashboard
 
@@ -73,9 +86,20 @@ router.get("/users/dashboard", redirectLogin, (req, res) => {
   }
 });
 //Route for comments
-router.post("/comment", redirectLogin, (req, res) => {
+router.post("/comment",findById, redirectLogin,(req, res) => {
   var postId = req.query.id;
+  var userID = userdata
   var comment = req.body.comment;
+  console.log(`user id ${userID.email}`)
+  // User.findOne({_id: userId}, (err, userData)=> {
+  //   if(err) {      
+  //     req.flash('error_msg', 'Problem Submiting Comment ')
+  //     res.redirect('/')
+  //    } else{
+      
+  //    }
+  // })
+ 
   var newComment = new Comment({
     comment: req.body.comment
   });
@@ -84,12 +108,12 @@ router.post("/comment", redirectLogin, (req, res) => {
     if (err) throw err;
     else {
       var commentId = comment._id;
-      console.log(commentId);
+      // console.log(commentId);
       Post.findOne({ _id: postId }, (err, result) => {
         if (err) throw err;
         else {
           var post = result;
-          console.log(post);
+          // console.log(post);
           post.comments.push(commentId);
           post.save();
         }
@@ -114,7 +138,7 @@ router.post("/users/login", redirectHome, (req, res) => {
           if (isMatch) {
             //Passing the authenticated user Id into the session
             req.session.userId = user._id;
-            res.redirect("/users/dashboard");
+            res.redirect("/");
           } else {
             res.send("failed");
           }
@@ -136,7 +160,7 @@ router.get("/users/logout", redirectLogin, (req, res) => {
       return res.redirect("/");
     } else {
       res.clearCookie(process.env.SESSION_NAME);
-      res.redirect("/users/login");
+      res.redirect("/");
     }
   });
 });
@@ -272,16 +296,18 @@ router.post(
 );
 
 // });
-router.get("/", redirectLogin, (req, res) => {
+router.get("/",  (req, res) => {
   const { userId } = req.session; // The Id of the Logged-in user
   Post.find({})
     .populate("comments")
     .exec((err, posts) => {
       if (err) throw err;
       else {
-        console.log(posts[0].comments[0].comment); //This access the first post=>first document in the comments array=>The comment
-
-        res.render("users", { posts: posts });
+        // console.log(posts[0].comments[0].comment); //This access the first post=>first document in the comments array=>The comment
+var testing = posts[0].comments;
+console.log(testing[0].comment)
+        res.render("users", { posts: posts, 
+                              userId});
       }
     });
 });

@@ -12,13 +12,31 @@
   </head>
   <body>
     <%- include ("./partials/messages") %>
+    <% if(typeof userId != 'undefined'){ %>
     <header class="navigation-bar">
       <ul>
         <li>
-          <a href="/users/logout"> Logout</a>
+          <a href="/users/logout">Logout</a>
+        </li>
+        <li>
+          <a href="/users/Dashboard">Dashboard</a>
         </li>
       </ul>
     </header>
+    <% } %>
+    <% if(typeof userId == 'undefined'){ %>
+
+      <header class="navigation-bar">
+        <ul>
+          <li>
+            <a href="/users/register">Register</a>
+          </li>
+          <li>
+            <a href="/users/login"> Login</a>
+          </li>
+        </ul>
+      </header>
+      <% } %>
     <section class="post">
       <%posts = posts.reverse();%>
       <% for(var i= 0; i < posts.length; i++) { %>
@@ -26,8 +44,9 @@
         <h1 class="post-title" id="<%=i%>"><%- posts[i].title %></h1>
         <article id="<%=i%>"><%- posts[i].post %></article>
         <li id="<%=i%>"><%= posts[i].comments[0] %></li>
-        <form action="/comment?id=<%=posts[i]._id%>" method="POST">
-          <label for="">comment</label>
+        <% if(typeof userId !== 'undefined' && posts !== 'undefined'){ %>
+        <form action="/comment?id=<%=posts[i]._id%>&&userId=<%=userId%>" method="POST">
+          <label for="">Leave a Comment</label>
           <textarea
             class="comment"
             name="comment"
@@ -39,6 +58,7 @@
             Submit
           </button>
         </form>
+        <% } %>
       </div>
       <% } %>
 
