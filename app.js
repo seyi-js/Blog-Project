@@ -41,13 +41,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // const IN_PROD = process.env.NODE_ENV === 'production'
 //Express Session
 app.use(session({
-    name: 'sid',
+    name: process.env.SESSION_NAME,
     resave: true,
     saveUninitialized: true,
-    secret: 'samuel',
-    store: new MongoStore({
-        mongooseConnection: db
-    }),
+    secret: process.env.SESSION_SECRET,
+    // store: new MongoStore({
+    //     mongooseConnection: db
+    // }),
     cookie: {
         maxAge: 1000 * 60 * 60 * 24,//Expires in 24hours
         originalMaxAge: 1000 * 60 * 60 * 24,//Expires in 24hours
