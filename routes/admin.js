@@ -73,7 +73,7 @@ router.post("/login", (req, res) => {
       req.flash('error_msg', 'Login error');
       res.redirect('/admin/login')
     });
-      
+
 
 });
 
@@ -102,7 +102,7 @@ router.post(
       var profileimage = req.file.filename;
       //   console.log(profileimage);
     } else {
-      
+
       var profileimage = "noimage.jpg";
     }
 
@@ -209,7 +209,7 @@ router.post(
               );
             }
           }).catch(err => {
-            if(err) 
+            if(err)
             console.log(err)
             req.flash('error_msg', 'Form could Not be summitted');
             res.redirect('/admin/register')
@@ -227,7 +227,7 @@ router.post("/post", redirectLogin, (req, res) => {
   if (!title || !post) {
     res.redirect("/admin/dashboard");
   } else {
-    
+
     var newItem = new Post({
       title: req.body.title,
       post: req.body.post
@@ -277,10 +277,10 @@ router.post("/update", redirectLogin, (req, res) => {
       $currentDate: { lastModified: true }
     };
 
-    
+
     Post.updateOne(myquery, newItem, function (err, res) {
       if (err) throw err;
-      
+
     });
   }
   res.redirect("/admin/dashboard");
