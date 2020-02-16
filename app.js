@@ -41,10 +41,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // const IN_PROD = process.env.NODE_ENV === 'production'
 //Express Session
 app.use(session({
-    name: process.env.SESSION_NAME,
+    name: 'sid',
     resave: true,
     saveUninitialized: true,
-    secret: process.env.SESSION_SECRET,
+    secret: 'samuel',
     store: new MongoStore({
         mongooseConnection: db
     }),
