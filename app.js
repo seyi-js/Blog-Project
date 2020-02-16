@@ -10,44 +10,38 @@ const upload = multer({ dest: "./static/img/uploads" });
 const path = require('path')
 const flash = require("connect-flash");
 var session = require("express-session");
-const mongoose =  require('mongoose');
+const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session)
 const PORT = process.env.PORT || 80;
 mongoose.set('useCreateIndex', true);
-// const uri = 'mongodb+srv://samuelseyi:OLUWASEYI50886@cluster0-ss5ul.mongodb.net/test?retryWrites=true&w=majority'
-// const url =  'mongodb://localhost:27017/blogDB';
-const uri = 'mongodb+srv://samuel:OLUWASEYI@cluster0-ss5ul.mongodb.net/test?retryWrites=true&w=majority'
-// const url = process.env.MONGO_URL
-// // const uri = ""
-// //const uri = process.env.ATLAS_URI;
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+//Switching between url in production and dev
+let url;
+if (process.env.NODE_ENV !== 'production') {
+    url = 'mongodb://localhost:process.env.MONG0_URL/blogDB';
+} else {
+
+    url = 'mongodb+srv://samuel:process.env.CLOUD_PASSWORD@cluster0-ss5ul.mongodb.net/test?retryWrites=true&w=majority'
+}
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
 var db = mongoose.connection;
 db.on("error", console.log.bind(console, "connection error"));
-db.once("open", function(callback) {
-    console.log("MongoDB Connected...");
+db.once("open", function (callback) {
+    console.log("MongoDB Connected...")
 });
-
 
 //Process .env config
 dotenv.config();
-// comment model
-const Comment = require("./models/comment");
-
-const Post = require("./models/post");
-
-// User model
-const User = require("./models/users");
 
 
 //Cookie Parser
 app.use(cookieParser());
 //BODY PARSER CONFIG
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 const IN_PROD = process.env.NODE_ENV === 'production'
 //Express Session
 app.use(session({
-    name:process.env.SESSION_NAME,
+    name: process.env.SESSION_NAME,
     resave: false,
     saveUninitialized: false,
     secret: process.env.SESSION_SECRET,
@@ -55,18 +49,16 @@ app.use(session({
         mongooseConnection: db
     }),
     cookie: {
-        maxAge:1000 * 60 * 60,//Expires in an hour
-        originalMaxAge: 1000 * 60 * 60,//Expires in an hour
+        maxAge: 1000 * 60 * 60 * 24,//Expires in 24hours
+        originalMaxAge: 1000 * 60 * 60 * 24,//Expires in 24hours
         sameSite: true,
         secure: IN_PROD
     }
-        })
-    );
+})
+);
 // connect-flash
 app.use(flash());
 
-// User model
-const Admin = require("./models/admin");
 
 
 
@@ -98,7 +90,7 @@ app.use("/admin", require("./routes/admin"));
 
 app.get("*", (req, res) => {
     res.send("<h1>error 404 Page not Found</h1>");
-  });
+});
 
 
 
