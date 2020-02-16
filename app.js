@@ -51,8 +51,8 @@ app.use(session({
     cookie: {
         maxAge: 1000 * 60 * 60 * 24,//Expires in 24hours
         originalMaxAge: 1000 * 60 * 60 * 24,//Expires in 24hours
-        sameSite: true,
-        secure: true
+        // sameSite: true,
+        // secure: true
     }
 })
 );
