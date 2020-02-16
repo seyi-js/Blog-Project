@@ -43,7 +43,7 @@
       <div class="post-element">
         <h1 class="post-title" id="<%=i%>"><%- posts[i].title %></h1>
         <article id="<%=i%>"><%- posts[i].post %></article>
-        <li id="<%=i%>"><%= posts[i].comments[0] %></li>
+        <!-- <li id="<%=i%>"><%= posts[i].comments[0] %></li> -->
         <% if(typeof userId !== 'undefined' && posts !== 'undefined'){ %>
         <form action="/comment?id=<%=posts[i]._id%>&&userId=<%=userId%>" method="POST">
           <label for="">Leave a Comment</label>
@@ -62,7 +62,7 @@
       </div>
       <% } %>
 
-      
+
     </section>
   </body>
 </html>

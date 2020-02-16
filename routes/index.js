@@ -78,10 +78,10 @@ router.get("/users/dashboard", redirectLogin, (req, res) => {
       } else{
         req.flash('error_msg', 'Please Login to View this resource')
       res.redirect('/users/login')
-      } 
-     
+      }
+
     }
- 
+
   })
   }
 });
@@ -92,14 +92,14 @@ router.post("/comment",findById, redirectLogin,(req, res) => {
   var comment = req.body.comment;
   console.log(`user id ${userID.email}`)
   // User.findOne({_id: userId}, (err, userData)=> {
-  //   if(err) {      
+  //   if(err) {
   //     req.flash('error_msg', 'Problem Submiting Comment ')
   //     res.redirect('/')
   //    } else{
-      
+
   //    }
   // })
- 
+
   var newComment = new Comment({
     comment: req.body.comment
   });
@@ -304,9 +304,9 @@ router.get("/",  (req, res) => {
       if (err) throw err;
       else {
         // console.log(posts[0].comments[0].comment); //This access the first post=>first document in the comments array=>The comment
-var testing = posts[0].comments;
-console.log(testing[0].comment)
-        res.render("users", { posts: posts, 
+// var testing = posts[0].comments;
+// console.log(testing[0].comment)
+        res.render("users", { posts: posts,
                               userId});
       }
     });
