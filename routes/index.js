@@ -298,7 +298,7 @@ router.post(
 
 // });
 router.get("/",  (req, res) => {
-  const { userId } = req.session; // The Id of the Logged-in user
+  // const { userId } = req.session; // The Id of the Logged-in user
   Post.find({})
     .populate("comments")
     .exec((err, posts) => {
@@ -308,7 +308,7 @@ router.get("/",  (req, res) => {
 // var testing = posts[0].comments;
 // console.log(testing[0].comment)
         res.render("users", { posts: posts,
-                              userId});
+                              userId: req.session.userId});
       }
     });
 });
