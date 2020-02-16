@@ -15,13 +15,13 @@ const MongoStore = require('connect-mongo')(session)
 const PORT = process.env.PORT || 80;
 mongoose.set('useCreateIndex', true);
 //Switching between url in production and dev
-// let url;
-// if (process.env.NODE_ENV == 'production') {
-  // const   url = 'mongodb://localhost:process.env.MONG0_URL/blogDB';
-// } else {
+let url;
+if (process.env.NODE_ENV == 'production') {
+    url = 'mongodb://localhost:process.env.MONG0_URL/blogDB';
+} else {
 
-const   url = 'mongodb+srv://samuel:OLUWASEYI@cluster0-ss5ul.mongodb.net/test?retryWrites=true&w=majority'
-// }
+   url = 'mongodb+srv://samuel:OLUWASEYI@cluster0-ss5ul.mongodb.net/test?retryWrites=true&w=majority'
+}
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
 var db = mongoose.connection;
 db.on("error", console.log.bind(console, "connection error"));
