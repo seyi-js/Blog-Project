@@ -20,7 +20,7 @@ if (process.env.NODE_ENV !== 'production') {
     url = 'mongodb://localhost:process.env.MONG0_URL/blogDB';
 } else {
 
-   url = 'mongodb+srv://samuel:OLUWASEYI@cluster0-ss5ul.mongodb.net/test?retryWrites=true&w=majority'
+   url = process.env.MONGO_URI;
 }
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
 var db = mongoose.connection;
@@ -36,7 +36,9 @@ dotenv.config();
 //Cookie Parser
 app.use(cookieParser());
 //BODY PARSER CONFIG
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
 
 
 //Express Session

@@ -138,7 +138,7 @@ router.post("/users/login", redirectHome, (req, res) => {
           if (isMatch) {
             //Passing the authenticated user Id into the session
             req.session.userId = user._id;
-            console.log(req.session.userId)
+            // console.log(req.session.userId)
             res.redirect("/");
           } else {
             res.send("failed");
