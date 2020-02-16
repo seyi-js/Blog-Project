@@ -299,6 +299,7 @@ router.post(
 // });
 router.get("/",  (req, res) => {
   // const { userId } = req.session; // The Id of the Logged-in user
+  console.log(`req.session ${req.session.userId}`)
   Post.find({})
     .populate("comments")
     .exec((err, posts) => {
