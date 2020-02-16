@@ -20,7 +20,7 @@ if (process.env.NODE_ENV !== 'production') {
     url = 'mongodb://localhost:process.env.MONG0_URL/blogDB';
 } else {
 
-    url = 'mongodb+srv://samuel:process.env.CLOUD_PASSWORD@cluster0-ss5ul.mongodb.net/test?retryWrites=true&w=majority'
+    url = 'mongodb+srv://samuel:OLUWASEYI@cluster0-ss5ul.mongodb.net/test?retryWrites=true&w=majority'
 }
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
 var db = mongoose.connection;
