@@ -298,8 +298,8 @@ router.post(
 
 // });
 router.get("/",  (req, res) => {
-  // const { userId } = req.session; // The Id of the Logged-in user
-  console.log(`req.session ${req.session.userId}`)
+  const { userId } = req.session; // The Id of the Logged-in user
+  // console.log(`req.session ${req.session.userId}`)
   Post.find({})
     .populate("comments")
     .exec((err, posts) => {
@@ -309,7 +309,7 @@ router.get("/",  (req, res) => {
 // var testing = posts[0].comments;
 // console.log(testing[0].comment)
         res.render("users", { posts: posts,
-                              userId: req.session.userId});
+                              userId});
       }
     });
 });

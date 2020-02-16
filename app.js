@@ -38,7 +38,7 @@ app.use(cookieParser());
 //BODY PARSER CONFIG
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// const IN_PROD = process.env.NODE_ENV === 'production'
+
 //Express Session
 app.use(session({
     name: process.env.SESSION_NAME,
@@ -51,8 +51,7 @@ app.use(session({
     cookie: {
         maxAge: 1000 * 60 * 60 * 24,//Expires in 24hours
         originalMaxAge: 1000 * 60 * 60 * 24,//Expires in 24hours
-        // sameSite: true,
-        // secure: true
+        
     }
 })
 );
