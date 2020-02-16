@@ -17,7 +17,7 @@ mongoose.set('useCreateIndex', true);
 //Switching between url in production and dev
 let url;
 if (process.env.NODE_ENV !== 'production') {
-    url = 'mongodb://localhost:process.env.MONG0_URL/blogDB';
+    url = process.env.MONGO_URL || 'mongodb://localhost:process.env.27017/blogDB';
 } else {
 
    url = process.env.MONGO_URI;
