@@ -67,12 +67,8 @@ router.post("/login", (req, res) => {
           }
         });
       }
-    })
-    .catch(err => {
-      console.log(err)
-      req.flash('error_msg', 'Login error');
-      res.redirect('/admin/login')
-    });
+    }).catch(err => console.log(err));
+      // res.redirect('/admin/login')
 
 
 });

@@ -433,7 +433,7 @@ router.get("/", (req, res) => {
   // console.log(`req.session ${req.session.userId}`)
   Post.find({})
     .populate("comments")
-    .distinct('comment')
+    // .distinct('comment')
     .exec((err, posts) => {
       if (err) throw err;
       else {
