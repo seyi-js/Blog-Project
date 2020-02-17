@@ -40,7 +40,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "node app.js",
+    "start": "pm2 start app.js",
     "dev": "nodemon app.js"
   },
   "repository": {

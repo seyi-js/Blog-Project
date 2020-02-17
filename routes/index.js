@@ -265,7 +265,7 @@ router.post("/users/login", redirectHome, (req, res) => {
       }
     })
     .catch(err => console.log(err));
-    res.redirect('/users/login')
+    // res.redirect('/users/login')
 });
 
 //Users Login
