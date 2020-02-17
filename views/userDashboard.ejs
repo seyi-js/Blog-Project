@@ -3,32 +3,37 @@
 <!--<![endif]-->
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title><%= lastname%> || Dashboard</title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="/static/css/stylesC.css">
 </head>
 
 <body>
-    <%- include ("./partials/messages") %>
-    <header class="navigation-bar">
-        <h1>Dashboard</h1>
+    <!-- <h1>Dashboard</h1> -->
+     <header class="navigation-bar">
+        
         <ul>
             <li>
                 <a href="/users/logout"> Logout</a>
             </li>
         </ul>
+        <ul>
+            <li>
+                <a href="/"> Home</a>
+            </li>
+        </ul>
     </header>
-
+    <%- include ("./partials/messages") %>
     <p class="lead mb-3">Welcome: <%= lastname %> <%= firstname %> </p>
     <p class="lead mb-3" id="myEmail">Email: <%= email %> </p>
     <p class="lead mb-3">Contact: <%= contact %> </p>
     <p class="lead mb-3">Dob: <%= dob %> </p>
     <p class="lead mb-3">Date: <%= date %> </p>
     <p class="lead mb-3">Gender: <%= gender %> </p>
-
+    <a href="/users/changepwd" class="btn btn-secondary">Change Password</a>
     <script src="" async defer></script>
 </body>
 

@@ -1,0 +1,43 @@
+
+html {
+	padding: 0px;
+	margin:0px;
+	background: blue;
+}
+
+body {
+	padding: 0px;
+	margin:0px;
+}
+
+/* Header/navigation bar*/
+header {
+	background:transparent;
+	height: 70px;
+	padding-top: 2px;
+	/*float: right;*/
+}
+header li  {
+	color:white;
+	display: inline;
+	margin:5px;
+	padding: 5px;
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+	list-style: none;
+	border-left-style: solid;
+	border-left-width: 2px;
+	border-left-color: aqua;
+	border-bottom-style: solid;
+	border-bottom-width: 2px;
+	border-bottom-color: aqua;
+	float: right;
+}
+
+header li:hover {
+	background-color: grey;
+}
+
+header li a {
+	color:white;
+	text-decoration: none;
+}

@@ -34,6 +34,7 @@
     "passport": "^0.4.1",
     "passport-http": "^0.3.0",
     "passport-local": "^1.0.0",
+    "pm2": "^4.2.3",
     "shortid": "^2.2.15",
     "upper-case": "^2.0.1"
   },
@@ -47,9 +48,7 @@
     "url": "git+https://github.com/seyi-js/Blog-Project.git"
   },
   "author": "ADEBAYO SAMUEL OLUWASEYI",
-  "license": {
-    "notValid": true
-  },
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/seyi-js/Blog-Project/issues"
   },
