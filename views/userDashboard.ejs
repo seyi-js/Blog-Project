@@ -27,13 +27,72 @@
         </ul>
     </header>
     <%- include ("./partials/messages") %>
-    <p class="lead mb-3">Welcome: <%= lastname %> <%= firstname %> </p>
-    <p class="lead mb-3" id="myEmail">Email: <%= email %> </p>
-    <p class="lead mb-3">Contact: <%= contact %> </p>
-    <p class="lead mb-3">Dob: <%= dob %> </p>
-    <p class="lead mb-3">Date: <%= date %> </p>
-    <p class="lead mb-3">Gender: <%= gender %> </p>
-    <a href="/users/changepwd" class="btn btn-secondary">Change Password</a>
+
+    <table>
+        <th colspan='2'>
+            <h1>Dashboard</h1>
+        </th>
+        <tr>
+            <td class='detail'>
+                Welcome
+            </td>
+            <td>
+                <%= lastname %>
+                <%= firstname %>
+            </td>
+            
+        </tr>
+        <tr>
+            <td class='detail'>
+                Email
+            </td>
+            <td>
+                <%= email %>  
+            </td>
+        </tr>
+        <tr>
+            <td class='detail'>
+                Contact
+            </td>
+            <td>
+                <%= contact %> 
+            </td>
+        </tr>
+        <tr>
+            <td class='detail'>
+                Date Of Birth
+            </td>
+            <td>
+                <%= dob %> 
+            </td>
+        </tr>
+        <tr>
+            <td class='detail'>
+                Date
+            </td>
+            <td>
+                <%= date %>
+            </td>
+        </tr>
+        <tr>
+            <td class='detail'>
+                Gender 
+            </td>
+            <td>
+                <%= gender %>
+            </td>
+        </tr>
+        <tr>
+            <td  colspan='2'>
+                <a href="/users/changepwd" class="btn btn-secondary">Change Password</a>
+            </td>
+            
+        </tr>
+        
+    </table>
+   
+    
+    
     <script src="" async defer></script>
 </body>
 

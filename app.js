@@ -12,12 +12,12 @@ const flash = require("connect-flash");
 var session = require("express-session");
 const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session)
-const PORT = process.env.PORT || 80;
+const PORT = process.env.PORT || 8080;
 mongoose.set('useCreateIndex', true);
 //Switching between url in production and dev
 let url;
 if (process.env.NODE_ENV !== 'production') {
-    url = process.env.MONGO_URL || 'mongodb://localhost:process.env.27017/blogDB';
+    url = process.env.MONGO_URL;
 } else {
 
    url = process.env.MONGO_URI;

@@ -41,3 +41,27 @@ header li a {
 	color:white;
 	text-decoration: none;
 }
+
+/* Table Section */
+table {
+	width: 100%;
+	margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid black;
+	border-collapse: collapse;
+}
+
+ td {
+	padding: 15px;
+	text-align:left;
+}
+
+th {
+	background : grey;
+	text-align : center;
+}
+td.detail {
+	background: grey;
+}

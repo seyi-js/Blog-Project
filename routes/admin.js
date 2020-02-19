@@ -52,6 +52,7 @@ router.post("/login", (req, res) => {
   Admin.findOne({ username: username })
     .then(user => {
       if (!user) {
+        req.flash('error_msg', 'Incorrect Username or password')
         res.redirect("/admin/login");
       } else {
         // Match password
@@ -60,9 +61,11 @@ router.post("/login", (req, res) => {
           if (isMatch) {
             //Passing the authenticated user Id into the session
             req.session.userId = user._id;
-            res.redirect("/admin/dashboard");
             req.flash('sucess_msg', 'Login Sucessful')
+            res.redirect("/admin/dashboard");
+            
           } else {
+            req.flash('error_msg', 'Incorrect Username or password')
             res.redirect("/admin/login");
           }
         });
@@ -233,7 +236,7 @@ router.post("/post", redirectLogin, (req, res) => {
       if (err) throw err;
       else {
         const PostId = Post._id;
-        console.log(PostId)//Post Id
+        // console.log(PostId)//Post Id
         res.redirect("/admin/dashboard");
       }
     });

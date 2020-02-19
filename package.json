@@ -4,6 +4,7 @@
   "description": "This is a personal project. A blogging app that allows the administrator to post articles written in HTML and css tags while been displayed to the users as a normal webpage.",
   "main": "app.js",
   "dependencies": {
+    "@pm2/io": "^4.3.3",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "connect-ensure-authenticated": "^1.0.8",
@@ -41,6 +42,8 @@
   "devDependencies": {},
   "scripts": {
     "start": "pm2 start app.js",
+    "test": "forever list ",
+    "test2": "forever --minUptime 10000 --spinSleepTime 3000 app.js",
     "dev": "nodemon app.js"
   },
   "repository": {
