@@ -41,13 +41,13 @@ router.get('/settings',(req,res)=>{
  
 });
 
-// router.post('/settings', (req,res)=>{
-// Settings.updateOne({},{
-//   "post_limit":req.body.post_limit
-// }, {upsert: true}, (err, doc)=>{
-//   res.redirect('/admin/settings')
-// })
-// })
+router.post('/settings', (req,res)=>{
+Settings.updateOne({},{
+  "post_limit":req.body.post_limit
+}, {upsert: true}, (err, doc)=>{
+  res.redirect('/admin/settings')
+})
+})
 // //Get next Post
 // router.get('/get-posts/:start/:limit', (req,res)=>{
 //   Post.find({},(err, posts)=>{
