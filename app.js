@@ -32,6 +32,7 @@ const User = require('./models/users')
 //Process .env config
 dotenv.config();
 
+const Settings = require('./models/settings')
 
 //Cookie Parser
 app.use(cookieParser());
