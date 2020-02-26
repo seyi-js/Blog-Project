@@ -33,9 +33,11 @@ const redirectHome = (req, res, next) => {
 //Settings Route
 
 router.get('/settings',(req,res)=>{
-  Settings.findOne({},(err, settings)=>{
+
+  res.render('adminsettings')
+  /*Settings.findOne({},(err, settings)=>{
     res.render('adminsettings', {settings: settings.post_limit})
-  })
+  })*/
  
 });
 
