@@ -33,11 +33,9 @@ const redirectHome = (req, res, next) => {
 //Settings Route
 
 router.get('/settings',(req,res)=>{
-
-  res.render('adminsettings')
-  /*Settings.findOne({},(err, settings)=>{
+  Settings.findOne({},(err, settings)=>{
     res.render('adminsettings', {settings: settings.post_limit})
-  })*/
+  })
  
 });
 
@@ -48,39 +46,39 @@ Settings.updateOne({},{
   res.redirect('/admin/settings')
 })
 })
-// //Get next Post
-// router.get('/get-posts/:start/:limit', (req,res)=>{
-//   Post.find({},(err, posts)=>{
-//     // var array = Array.from(posts)
-//     // if(posts.length !== 'undefined') {
-//       res.send(posts)
-//     // }
+//Get next Post
+router.get('/get-posts/:start/:limit', (req,res)=>{
+  Post.find({},(err, posts)=>{
+    // var array = Array.from(posts)
+    // if(posts.length !== 'undefined') {
+      res.send(posts)
+    // }
     
     
-//     // console.log(array)
-//    }).sort({_id:-1}).skip(parseInt(req.params.start)).limit(parseInt(req.params.limit))
-// })
-// //Admin DashBoard
-// router.get("/dashboard", (req, res) => {
-//   Settings.findOne({}, (err, settings)=>{
-//     // console.log(settings.post_limit)
-//     var postLimit = parseInt(settings.post_limit);
+    // console.log(array)
+   }).sort({_id:-1}).skip(parseInt(req.params.start)).limit(parseInt(req.params.limit))
+})
+//Admin DashBoard
+router.get("/dashboard", (req, res) => {
+  Settings.findOne({}, (err, settings)=>{
+    // console.log(settings.post_limit)
+    var postLimit = parseInt(settings.post_limit);
 
-//     Post.find({}, (err, posts)=>{
-//       res.render("adminBoard", { posts: posts,
-//                                   postLimit});
-//       // console.log(posts)
-//     }).sort({_id:-1})/*Sorting From Highest to lowest*/.limit(postLimit)
+    Post.find({}, (err, posts)=>{
+      res.render("adminBoard", { posts: posts,
+                                  postLimit});
+      // console.log(posts)
+    }).sort({_id:-1})/*Sorting From Highest to lowest*/.limit(postLimit)
    
       
-//   })
+  })
   
    
     
       
     
   
-// });
+});
 
 //Login Page
 router.get("/login", (req, res) => {
