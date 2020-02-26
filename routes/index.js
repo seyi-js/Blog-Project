@@ -5,6 +5,9 @@ const upload = multer({
   dest: "./static/img/uploads"
 });
 const bcrypt = require("bcryptjs");
+var nodemailer = require("nodemailer");
+const async = require('async');
+const crypto = require('crypto')
 
 //For Post schema
 const Post = require("../models/post");
@@ -15,7 +18,8 @@ const Comment = require("../models/comment");
 
 // User model
 const User = require("../models/users");
-
+//Settings Schema
+const Settings = require('../models/settings')
 // Redirect Login For protecting routes
 const redirectLogin = (req, res, next) => {
   if (!req.session.userId) {
@@ -50,6 +54,193 @@ const findById = (req, res, next) => {
     }
   })
 }
+
+//Forgot Password
+router.get('/users/f_password',(req,res)=>{
+  res.render('forgotUpassword');
+});
+
+router.post('/users/f_password', (req, res, next)=>{
+  const email = req.body.email;
+          async.waterfall([
+            (done)=>{
+              crypto.randomBytes(20, (err, buf)=> {
+                var token = buf.toString('hex');
+                done(err, token);
+              });
+            },
+            (token, done)=> {
+              User.findOne({email: req.body.email}, (err, user)=> {
+                if(!user){
+                  req.flash('error_msg', 'Invalid Email')
+                  return res.redirect('/users/f_password');
+                }
+                // console.log(user)
+                user.resetPasswordToken = token;
+              user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+              user.save((err) => {
+                done(err, token, user);
+              });
+              });
+
+
+              
+            },
+            (token, user, done)=>{
+               //Here goes the node mailer stuff
+              //  console.log(token)
+               var transporter = nodemailer.createTransport({
+                service: "gmail",
+                port:587,
+                secure: false,
+                auth: {
+                  user: process.env.GMAIL_USERNAME,
+                  pass: process.env.GMAIL_PASSWORD
+                },
+                tls:{
+                    rejectUnauthorized: false
+                }
+              });
+            
+              var mailOptions = {
+                from: 'Nodemailer Contact "adebayosamueljahsmine925@gmail.com"',
+                to: user.email,
+                subject: "Sending Email using Node.js",
+                text: 'Click the link below to reset your your password. Kindly disregard this email if you didnt request for a password reset link ' + 'http://' + req.headers.host + '/users/resetP/' + token + '\n\n',
+                // html: outp
+              };
+            
+              transporter.sendMail(mailOptions, function(error, info) {
+                if (error) {
+                  console.log(error);
+                } else {
+                  console.log("Email sent: " + info.response);
+                  req.flash('success_msg', `A password reset Link has been sent to ${email} with further instructions.`)
+                  res.redirect('/users/f_password')
+                }
+              });
+               
+            }//
+          ])
+         
+          
+         //End of else
+});
+
+
+//Reset Password
+router.get('/users/resetP/:token', (req, res)=>{
+  User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: {$gt: Date.now()}},(err, user)=> {
+  if(!user){
+    req.flash('error_msg', 'Invalid Token');
+    return res.redirect('/users/f_password');
+  }
+  res.render('resetUpassword', {token: req.params.token})
+})
+});
+
+router.post('/users/resetP/:token', (req, res)=> {
+  async.waterfall([
+    (done) =>{
+  User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: {$gt: Date.now()}},(err, user)=>{
+    // console.log(req.params.token)
+    if(err) {
+      console.log(err)
+      req.flash('error_msg', 'Invalid Token');
+      return res.redirect('back');
+    }
+    if(!user){
+      req.flash('error_msg', 'Invalid Token');
+      return res.redirect('back');
+    }
+    const password1 = req.body.password1;
+    const password2 = req.body.password2;
+    if(password1 === password2){
+      var newUser = {
+        password2
+      };
+      //Hash Password
+      bcrypt.genSalt(10, (err, salt) =>
+        bcrypt.hash(newUser.password2, salt, (err, hash) => {
+          if (err) {
+            console.log(err);
+            req.flash('error_msg', 'error changing password');
+            res.redirect("back", {
+              oldpassword,
+              password1,
+              password2
+            });
+          }
+          // Set password to hashed
+          newUser.password2 = hash;
+            // save user
+            var myquery = {
+              email: user.email
+            };
+            var newvalues = {
+              $set: {
+                password: newUser.password2,
+                resetPasswordToken: undefined,
+                resetPasswordExpires: undefined
+              },
+              $currentDate: {
+                lastModified: true
+              }
+            };
+            User.updateOne(myquery, newvalues, (err, data)=> {
+              if(err) console.log(err);
+              
+              done(err, user);
+            })
+          
+        })//
+      )
+    } else{
+      req.flash('error_msg', 'password do not match');
+      return res.redirect('back');
+    }
+  })
+},
+  (user, done)=>{
+
+  var transporter = nodemailer.createTransport({
+    service: "gmail",
+    port:587,
+    secure: false,
+    auth: {
+      user: process.env.GMAIL_USERNAME,
+      pass: process.env.GMAIL_PASSWORD
+    },
+    tls:{
+        rejectUnauthorized: false
+    }
+  });
+
+  var mailOptions = {
+    from: 'Nodemailer Contact process.env.GMAIL_USERNAME',
+    to: user.email,
+    subject: "Sending Email using Node.js",
+    text: `Your password to ${user.email} account has been Changed Successfully`,
+    // html: output
+  };
+
+  transporter.sendMail(mailOptions, function(error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Email sent: " + info.response);
+      req.flash("success_msg", "Password Changed Successfully.");
+              req.session.userId = user._id;
+              // console.log(req.session.userId)
+              res.redirect("/");
+    }
+  });
+}//
+])
+});
+
+
+
 
 //Change Password
 router.get('/users/changepwd', redirectLogin, (req, res) => {
@@ -316,6 +507,8 @@ router.post(
     contact = req.body.contact;
     password = req.body.password;
     password2 = req.body.password2;
+    // resetPasswordToken = null
+    // resetPasswordExpires= null
 
     let errors = [];
 
@@ -393,7 +586,9 @@ router.post(
             email,
             contact,
             profileimage,
-            password
+            password,
+            // resetPasswordToken,
+            // resetPasswordExpires
           });
           //Hash Password
           bcrypt.genSalt(10, (err, salt) =>
@@ -431,9 +626,15 @@ router.get("/", (req, res) => {
     userId
   } = req.session; // The Id of the Logged-in user
   // console.log(`req.session ${req.session.userId}`)
-  Post.find({})
+  Settings.findOne({}, (err, settings)=>{
+    // console.log(settings.post_limit)
+    var postLimit = parseInt(settings.post_limit);
+
+    Post.find({}) 
     .populate("comments")
     // .distinct('comment')
+    .sort({_id: -1})
+    .limit(postLimit)
     .exec((err, posts) => {
       if (err) throw err;
       else {
@@ -443,10 +644,38 @@ router.get("/", (req, res) => {
         // console.log(posts)
         res.render("users", {
           posts: posts,
-          userId
+          userId,
+          postLimit
         });
       }
     });
+   
+      
+  })
+  
 });
+
+router.get('/users/queryPost', (req, res)=>{
+  var id = req.query.id;
+  const {
+    userId
+  } = req.session; // The Id of the Logged-in user
+  Post.findOne({_id: id}).populate('comments').exec((err, post)=>{
+    res.render('post', {post, userId})
+  })
+});
+
+//Get next Post
+router.get('/users/get-posts/:start/:limit', (req,res)=>{
+  Post.find({},(err, posts)=>{
+    // var array = Array.from(posts)
+    // if(posts.length !== 'undefined') {
+      res.send(posts)
+    // }
+    
+    
+    // console.log(array)
+   }).sort({_id:-1}).skip(parseInt(req.params.start)).limit(parseInt(req.params.limit))
+})
 
 module.exports = router;

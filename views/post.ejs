@@ -4,9 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" type="text/css" href="static/css/styles.css" />
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    
+    <!-- <link rel="stylesheet"  href="/static/css/post.css" /> -->
+    <link rel="stylesheet" type="text/css" href="/static/css/styles.css" />
     <title>
       Blog
     </title>
@@ -39,26 +38,34 @@
       </header>
       <% } %>
     <section class="post">
-      <div id="posts">
-      <% posts.forEach(function(post){%> 
+       
+        
       <div class="post-element">
+        <% if(typeof post !== 'undefined'){ %>
         <h1 class="post-title" id=""><a href="/users/queryPost?id=<%=post._id%>"><%- post.title %></a></h1>
-       
+        <article id=""><%- post.post %></article>
+        <% } else{ %> 
+            <h1>The Page You requested For is not Available</h1>
+        <%}%>
+        <% if(typeof userId !== 'undefined' && post !== 'undefined'){ %>
+        <form action="/comment?id=<%=post._id%>&&userId=<%=userId%>" method="POST">
+          <label for="">Leave a Comment</label>
+          <textarea
+            class="comment"
+            name="comment"
+            placeholder="Enter Comment"
+            value=""
+          >
+          </textarea>
+          <button type="submit" class="button">
+            Submit
+          </button>
+        </form>
+        <% } %>
       </div>
-      <% }) %>
-    </div>
+     
 
-    
-      <input id="postLimit" type="hidden" value=" <%=postLimit%>"></input>
-      <div class="next">
-        <button class='button' style="float: right;" onClick='getNext();'>Next</button>
-       </div>
-        
-        
-       
-        <button class='button'  onClick="getPrevious();">Previous</button>
-      
+
     </section>
-    <script type="text/javascript" src="/static/script/script.js"></script>
   </body>
 </html>

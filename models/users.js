@@ -37,6 +37,10 @@ var userSchema = new mongoose.Schema({
     profileimage: {
         type : String,
     },
+    resetPasswordToken: {
+        type:String
+    },
+    resetPasswordExpires: Date
     });
 
    

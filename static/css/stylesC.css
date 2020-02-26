@@ -1,14 +1,14 @@
 
-html {
+html,body{
 	padding: 0px;
 	margin:0px;
-	background: blue;
+	background: rgb(50 70 60);
 }
 
-body {
+/* body {
 	padding: 0px;
 	margin:0px;
-}
+} */
 
 /* Header/navigation bar*/
 header {
@@ -46,6 +46,7 @@ header li a {
 table {
 	width: 100%;
 	margin-top: 20px;
+	/* border-radius: 100px; */
 }
 
 table, th, td {
@@ -64,4 +65,21 @@ th {
 }
 td.detail {
 	background: grey;
+}
+/*Change password section*/
+.change-pw a {
+	text-decoration: none;
+	color: black;
+	/* text-align: center; */
+	
+}
+
+.change-pw  {
+	margin-top: 40px;
+	margin-right: 10px;
+	float: right;
+	background: grey;
+	padding: 2px 5px 2px 5px;
+	border: 2px solid black;
+	border-radius: 7px;
 }
