@@ -1,64 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" type="text/css" href="static/css/styles.css" />
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    
-    <title>
-      Blog
-    </title>
-  </head>
-  <body>
-    <%- include ("./partials/messages") %>
-    <% if(typeof userId != 'undefined'){ %>
-    <header class="navigation-bar">
-      <ul>
-        <li>
-          <a href="/users/logout">Logout</a>
-        </li>
-        <li>
-          <a href="/users/dashboard">Dashboard</a>
-        </li>
-      </ul>
-    </header>
-    <% } %>
-    <% if(typeof userId == 'undefined'){ %>
 
-      <header class="navigation-bar">
-        <ul>
-          <li>
-            <a href="/users/register">Register</a>
-          </li>
-          <li>
-            <a href="/users/login"> Login</a>
-          </li>
-        </ul>
-      </header>
-      <% } %>
-    <section class="post">
-      <div id="posts">
-      <% posts.forEach(function(post){%> 
-      <div class="post-element">
-        <h1 class="post-title" id=""><a href="/users/queryPost?id=<%=post._id%>"><%- post.title %></a></h1>
-       
-      </div>
-      <% }) %>
-    </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="stylesheet" type="text/css" href="/static/css/users.css" />
+  <!-- <link rel="stylesheet" type="text/css" href="/static/css/w3.css" /> -->
+  <link rel="stylesheet" type="text/css" href="/static/css/bootstrap/bootstrap.min.css" />
+  <script src="/static/css/bootstrap/bootstrap.min.js"></script>
+  <script src="/static/css/bootstrap/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
-    
-      <input id="postLimit" type="hidden" value=" <%=postLimit%>"></input>
-      <div class="next">
-        <button class='button' style="float: right;" onClick='getNext();'>Next</button>
-       </div>
-        
-        
-       
-        <button class='button'  onClick="getPrevious();">Previous</button>
-      
-    </section>
-    <script type="text/javascript" src="/static/script/script.js"></script>
-  </body>
+  <title>
+    Blog
+  </title>
+</head>
+
+<body style="background:black;">
+
+  <%- include ("./partials/messages") %>
+  <% if(typeof userId != 'undefined'){ %>
+  <header class="navigation-bar">
+    <ul>
+      <li class="nav-item">
+        <a href="/users/logout">Logout</a>
+      </li>
+      <li class="nav-item">
+        <a href="#">Trends</a>
+      </li>
+      <li class="nav-item">
+        <a href="/users/dashboard">Dashboard</a>
+      </li>
+    </ul>
+  </header>
+  <% } %>
+  <% if(typeof userId == 'undefined'){ %>
+
+  <header class="navigation-bar ">
+    <ul>
+      <li class="nav-item" >
+        <a href="/users/register">Register</a>
+      </li>
+      <li class="nav-item">
+        <a href="/users/login"> Login</a>
+      </li>
+    </ul>
+  </header>
+  <% } %>
+  <div class="header">
+    <h1 class="header">Links</h1>
+  </div>
+
+  <section class="post">
+    <!-- <div class="row"> -->
+      <!-- <div class="col-sm-12 col-md-12 col-lg-1 " style="background-color: azure;"> -->
+
+
+        <!-- <div id="posts"> -->
+        <% posts.forEach(function(post){%>
+        <div class="post-element">
+          <img src="/static/img/hire-bg.jpg" class="img-responsive" alt="sam" >
+          <h1 class="post-title" id=""><a href="/users/queryPost?id=<%=post._id%>"><%- post.title %></a></h1>
+
+
+        </div>
+        <% }) %>
+        <!-- </div> -->
+
+      <!-- </div> -->
+    <!-- </div> -->
+  </section>
+  <input id="postLimit" type="hidden" value=" <%=postLimit%>"></input>
+
+<!-- </div> -->
+
+  <div class="next">
+    <button class='btn btn-primary btn-sm' style="float: right;" onClick='getNext();'>Next</button>
+  </div>
+
+
+
+  <button class='btn btn-primary btn-sm' onClick="getPrevious();">Previous</button>
+
+
+  <script type="text/javascript" src="/static/script/script.js"></script>
+</body>
+
 </html>

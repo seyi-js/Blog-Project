@@ -38,8 +38,7 @@ const redirectHome = (req, res, next) => {
     next();
   }
 };
-//fOR FINDING USERS BY ID
-let userdata;
+//fOR FINDING USERS BY ID333
 const findById = (req, res, next) => {
   var userId = req.query.userId;
   User.findOne({
@@ -84,7 +83,7 @@ router.post('/users/f_password', (req, res, next)=>{
               });
 
 
-              
+
             },
             (token, user, done)=>{
                //Here goes the node mailer stuff
@@ -101,7 +100,7 @@ router.post('/users/f_password', (req, res, next)=>{
                     rejectUnauthorized: false
                 }
               });
-            
+
               var mailOptions = {
                 from: 'Nodemailer Contact "adebayosamueljahsmine925@gmail.com"',
                 to: user.email,
@@ -109,7 +108,7 @@ router.post('/users/f_password', (req, res, next)=>{
                 text: 'Click the link below to reset your your password. Kindly disregard this email if you didnt request for a password reset link ' + 'http://' + req.headers.host + '/users/resetP/' + token + '\n\n',
                 // html: outp
               };
-            
+
               transporter.sendMail(mailOptions, function(error, info) {
                 if (error) {
                   console.log(error);
@@ -119,11 +118,11 @@ router.post('/users/f_password', (req, res, next)=>{
                   res.redirect('/users/f_password')
                 }
               });
-               
+
             }//
           ])
-         
-          
+
+
          //End of else
 });
 
@@ -189,10 +188,10 @@ router.post('/users/resetP/:token', (req, res)=> {
             };
             User.updateOne(myquery, newvalues, (err, data)=> {
               if(err) console.log(err);
-              
+
               done(err, user);
             })
-          
+
         })//
       )
     } else{
@@ -628,9 +627,9 @@ router.get("/", (req, res) => {
   // console.log(`req.session ${req.session.userId}`)
   Settings.findOne({}, (err, settings)=>{
     // console.log(settings.post_limit)
-    var postLimit = parseInt(settings.post_limit);
+    var postLimit = Number(settings.post_limit);
 
-    Post.find({}) 
+    Post.find({})
     .populate("comments")
     // .distinct('comment')
     .sort({_id: -1})
@@ -649,10 +648,10 @@ router.get("/", (req, res) => {
         });
       }
     });
-   
-      
+
+
   })
-  
+
 });
 
 router.get('/users/queryPost', (req, res)=>{
@@ -672,8 +671,8 @@ router.get('/users/get-posts/:start/:limit', (req,res)=>{
     // if(posts.length !== 'undefined') {
       res.send(posts)
     // }
-    
-    
+
+
     // console.log(array)
    }).sort({_id:-1}).skip(parseInt(req.params.start)).limit(parseInt(req.params.limit))
 })

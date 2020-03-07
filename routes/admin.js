@@ -3,6 +3,9 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const multer = require("multer");
 const upload = multer({ dest: "./static/img/uploads" });
+var nodemailer = require("nodemailer");
+const async = require('async');
+const crypto = require('crypto')
 
 // From Post Schema
 const Post = require("../models/post");
@@ -29,10 +32,77 @@ const redirectHome = (req, res, next) => {
     next();
   }
 };
+//Forgot Password
+router.get('/forgotAdmin', (req,res)=>{
+  res.render('ForgotAdmin')
+});
 
+router.post('/forgotAdmin', (req,res)=>{
+  const email = req.body.email;
+          async.waterfall([
+            (done)=>{
+              crypto.randomBytes(20, (err, buf)=> {
+                var token = buf.toString('hex');
+                done(err, token);
+              });
+            },
+            (token, done)=> {
+              Admin.findOne({email: req.body.email}, (err, user)=> {
+                if(!user){
+                  req.flash('error_msg', 'Invalid Email')
+                  return res.redirect('/admin/forgotAdmin');
+                }
+                // console.log(user)
+                user.resetPasswordToken = token;
+              user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+              user.save((err) => {
+                done(err, token, user);
+              });
+              });
+
+
+
+            },
+            (token, user, done)=>{
+               //Here goes the node mailer stuff
+              //  console.log(token)
+               var transporter = nodemailer.createTransport({
+                service: "gmail",
+                port:587,
+                secure: false,
+                auth: {
+                  user: process.env.GMAIL_USERNAME,
+                  pass: process.env.GMAIL_PASSWORD
+                },
+                tls:{
+                    rejectUnauthorized: false
+                }
+              });
+
+              var mailOptions = {
+                from: 'Nodemailer Contact "adebayosamueljahsmine925@gmail.com"',
+                to: user.email,
+                subject: "Sending Email using Node.js",
+                text: 'Click the link below to reset your your password. Kindly disregard this email if you didnt request for a password reset link ' + 'http://' + req.headers.host + '/users/resetP/' + token + '\n\n',
+                // html: outp
+              };
+
+              transporter.sendMail(mailOptions, function(error, info) {
+                if (error) {
+                  console.log(error);
+                } else {
+                  console.log("Email sent: " + info.response);
+                  req.flash('success_msg', `A password reset Link has been sent to ${email} with further instructions.`)
+                  res.redirect('/forgotAdmin')
+                }
+              });
+
+            }//
+          ])
+});
 //Settings Route
 
-router.get('/settings',(req,res)=>{
+router.get('/settings',redirectLogin, (req,res)=>{
   Settings.findOne({},(err, settings)=>{
     res.render('adminsettings', {settings: settings.post_limit})
   })
@@ -59,7 +129,7 @@ router.get('/get-posts/:start/:limit', (req,res)=>{
    }).sort({_id:-1}).skip(parseInt(req.params.start)).limit(parseInt(req.params.limit))
 })
 //Admin DashBoard
-router.get("/dashboard", (req, res) => {
+router.get("/dashboard",redirectLogin,  (req, res) => {
   Settings.findOne({}, (err, settings)=>{
     // console.log(settings.post_limit)
     var postLimit = parseInt(settings.post_limit);

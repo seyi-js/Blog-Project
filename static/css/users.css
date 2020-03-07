@@ -1,0 +1,105 @@
+html {
+	padding: 0;
+	margin:0;
+	/* background: black; */
+	/* background: rgba(50, 60, 60, 1); */
+	/*background-color:white;*/
+	/* background: url(/static/img/Tulips.jpg) no-repeat center fixed; */
+    /* background-size: cover; */
+}
+
+body {
+	padding: 0;
+	margin:0;
+}
+
+/* Header/navigation bar*/
+
+header ul {
+   background-color: #f3f3f3;
+
+  top: 0;
+  width: 100%;
+  margin:0;
+  padding:0;
+  position:fixed;
+  overflow: hidden;
+}
+header li  {
+  border-left: 1px solid #bbb;
+  margin:  0 ;
+	padding: 0;
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+	list-style: none;
+	float: right;
+}
+header li:last-child {
+    border-left: none;
+}
+header li:hover {
+	background-color: grey;
+
+}
+header li a {
+	color:#666;
+	text-decoration: none;
+  display: block;
+  text-align: center;
+  padding: 14px 16px;
+
+
+}
+.nav-item:hover {
+  transition: all 0.5s ease-out;
+	text-decoration: none;
+
+}
+.nav-item.active {
+	background-color: blue;
+}
+
+div.header {
+
+	width: 100px;
+	padding:  70px 10px 0 10px;
+	text-align: center;
+}
+h1.header {
+	color: brown;
+	font-family: helvetica;
+	/* border: 2px solid white; */
+}
+
+/* @media only and screen(max-width:768px){
+
+} */
+/*Post Section*/
+ section.post {
+	 display: grid;
+  grid-gap: 0.7rem;
+  grid-template-columns: repeat(3, 1fr);
+	/* background: black; */
+ }
+
+ section div.post-element {
+	 width: 100%;
+	 background: white;
+
+ }
+ section div.post-element:hover {
+      opacity: 0.5;
+      transition: all 0.5s ease-out;
+		}
+
+
+			@media only screen and (max-width: 768px ) {
+				section.post {
+					display: grid;
+				 grid-gap: 0.7rem;
+				 grid-template-columns: repeat(1, 1fr);
+				}
+				section div.post-element {
+			 	 width: 100%;
+			  }
+
+			}

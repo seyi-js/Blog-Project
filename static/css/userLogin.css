@@ -4,6 +4,7 @@ html,body{
     font-family: sans-serif;
     background: url(/static/img/video-bg.jpg) no-repeat center fixed;
     background-size: cover;
+    /* opacity: 16; */
 }
 
 .login-box {
@@ -30,7 +31,7 @@ padding: 13px 0;
     padding: 8px 0;
     margin:8px 0;
     border-bottom: 1px solid #4caf50;
-    
+
 }
 
 .form-group i{
