@@ -3,4 +3,4 @@
 /package-lock.json
 /blogDB
 /nohup.out
-
+/views/userTest.ejs

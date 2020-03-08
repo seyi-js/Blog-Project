@@ -89,7 +89,7 @@ router.post('/users/f_password', (req, res, next)=>{
                //Here goes the node mailer stuff
               //  console.log(token)
                var transporter = nodemailer.createTransport({
-                service: "gmail",
+                service: "gmail.com",
                 port:587,
                 secure: false,
                 auth: {
@@ -642,7 +642,7 @@ router.get("/", (req, res) => {
         // console.log(testing[0].comment)
         // console.log(posts)
         res.render("users", {
-          posts: posts,
+          posts,
           userId,
           postLimit
         });

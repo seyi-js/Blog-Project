@@ -6,6 +6,9 @@ html {
 	margin:0px;
 	background-color:white;
 	background: url(/static/img/Desert.jpg) no-repeat center fixed;
+	-webkit-background-size:cover;
+-moz-background-size:cover;
+-o-background-size:cover;
     background-size: cover;
 }
 body {

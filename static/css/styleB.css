@@ -7,7 +7,10 @@ html {
 	margin:0px;
 	background-color:white;
 	background: url(/static/img/Penguins.jpg) no-repeat center fixed;
-    background-size: cover;
+	background-size: cover;
+	-webkit-background-size:cover;
+-moz-background-size:cover;
+-o-background-size:cover;
 }
 body {
 	padding: 0px;

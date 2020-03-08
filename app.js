@@ -99,40 +99,6 @@ const Post = require('./models/post')
 
 
 const Comments = require('./models/comment')
-Post.find({}).populate('comments', 'comment').exec((err, result)=> {
-    for(var i= 0; i < result.length; i++){
-       var title = result[i].comments;
-      
-    //    console.log(title)
-    } 
-    for(var l = 0; l < title.length; l++){
-         var comment =title[l].comment
-        //  console.log(comment)   
-    }
-    // console.log(result[0].comments[1].comment)
-});
-
-
-Post.find().limit(2,(err,result)=>{
-    // console.log(result)
-})
-
-// Post.find({},(err,result)=>{console.log(result)}).skip(1).limit(2).sort({_id: -1})
-
-
-
-// Post.find({},(err, posts)=>{
-//     console.log(posts)
-//    }).sort({_id:-1}).skip(1).limit(2)
-
-Post.find({}).exec((err, post)=>{
-    // console.log(post)
-})
-
-// db.collection('posts').find({}).toArray(function (err, result){
-//     console.log(result)
-// })
-
 
 
 

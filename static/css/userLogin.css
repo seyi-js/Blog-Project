@@ -4,6 +4,9 @@ html,body{
     font-family: sans-serif;
     background: url(/static/img/video-bg.jpg) no-repeat center fixed;
     background-size: cover;
+    -webkit-background-size:cover;
+-moz-background-size:cover;
+-o-background-size:cover;
     /* opacity: 16; */
 }
 
