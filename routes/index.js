@@ -4,6 +4,7 @@ const multer = require("multer");
 const upload = multer({
   dest: "./static/img/uploads"
 });
+const imageFolder="../static/img/uploads/";
 const bcrypt = require("bcryptjs");
 var nodemailer = require("nodemailer");
 const async = require('async');
@@ -38,14 +39,15 @@ const redirectHome = (req, res, next) => {
     next();
   }
 };
-//fOR FINDING USERS BY ID333
+//fOR FINDING USERS BY ID
 const findById = (req, res, next) => {
-  var userId = req.query.userId;
+  // var userId = req.query.userId ;
+  var {userId} = req.session ;
   User.findOne({
     _id: userId
   }, (err, user) => {
     if (err) {
-      req.flash('error_msg', 'Problem submiting comment');
+      // req.flash('error_msg', 'Problem submiting comment');
       res.redirect('/')
     } else {
       userdata = user;
@@ -53,6 +55,37 @@ const findById = (req, res, next) => {
     }
   })
 }
+//Users Settings/Edit Profile
+router.get('/users/userSettings', findById, redirectLogin,(req, res)=> {
+  const userId = userdata;
+  // console.log(userId.profileimage)
+  
+  res.render('userSettings',{email: userId.email, contact: userId.contact,   profileImage: imageFolder + userId.profileimage})
+});
+//Users Settings/Edit Profile
+router.post('/users/userSettings',findById,upload.single("ProfileImage"),(req, res)=>{
+const {email, contact} = req.body;
+//Prevent Empty Form
+let profileImage;
+if(req.file){
+  profileImage = req.file.filename;
+}else {
+  profileImage = 'noimage.jpg';
+}
+if(!email || !contact){
+  req.flash('error_msg', 'Please Fill in all Fields');
+  res.redirect('/users/usersettings')
+ 
+} else{
+  
+  userdata.contact = contact;
+  userdata.email = email;
+  userdata.profileimage = profileImage; 
+  userdata.save();
+  res.redirect('/users/dashboard')
+}
+
+});
 
 //Forgot Password
 router.get('/users/f_password',(req,res)=>{
@@ -105,7 +138,7 @@ router.post('/users/f_password', (req, res, next)=>{
                 from: 'Nodemailer Contact "adebayosamueljahsmine925@gmail.com"',
                 to: user.email,
                 subject: "Sending Email using Node.js",
-                text: 'Click the link below to reset your your password. Kindly disregard this email if you didnt request for a password reset link ' + 'http://' + req.headers.host + '/users/resetP/' + token + '\n\n',
+                text: 'Click the link below to reset your your password. Kindly disregard this email if you didnt request for a password reset link ' + 'https://' + req.headers.host + '/users/resetP/' + token + '\n\n',
                 // html: outp
               };
 
@@ -115,7 +148,7 @@ router.post('/users/f_password', (req, res, next)=>{
                 } else {
                   console.log("Email sent: " + info.response);
                   req.flash('success_msg', `A password reset Link has been sent to ${email} with further instructions.`)
-                  res.redirect('/users/f_password')
+                  res.redirect('/users/f_password');
                 }
               });
 
@@ -382,7 +415,7 @@ router.get("/users/dashboard", redirectLogin, (req, res) => {
             dob: user.dob,
             gender: user.gender,
             date: new Date().toLocaleString(),
-            // profileimage:imageFolder + req.user.profileimage
+            profileimage:imageFolder + user.profileimage
           });
         } else {
           req.flash('error_msg', 'Please Login to View this resource')

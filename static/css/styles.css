@@ -72,7 +72,17 @@ section.post a {
 section.post .post-title {
 	text-align: center;
 }
+/*Comments Section*/
+section.post div.comments {
+	background: blue;
+}
 
+section.post div.comments li {
+	list-style: none;
+	font-family: aerial;
+	color: pink;
+	font-size: 20px;
+}
 /*Form Section */
 
 section.post form {

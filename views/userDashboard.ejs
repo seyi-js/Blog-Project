@@ -9,6 +9,11 @@
     <title><%= lastname%> || Dashboard</title>
     <meta name="description" content="">
     <link rel="stylesheet" href="/static/css/stylesC.css">
+    <!-- <link rel="stylesheet" type="text/css" href="/static/css/bootstrap/bootstrap.min.css" /> -->
+    <script src="/static/css/bootstrap/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="/static/css/bootstrap/bootstrap.min.js"></script>
+    
 </head>
 
 <body>
@@ -26,6 +31,7 @@
             </li>
         </ul>
     </header>
+    <div id="profile"><img id='profile-image' src= '<%= profileimage %>' height="50px"  /></div>
     <%- include ("./partials/messages") %>
 
     <table>
@@ -84,8 +90,11 @@
         </tr>
 
     </table>
-    <div class="change-pw">
+    <div class="change-pw btn-info">
         <a href="/users/changepwd">Change Password</a>
+    </div>
+    <div class="change-pw">
+        <a href="/users/Usersettings">Edit Profile</a>
     </div>
 
 

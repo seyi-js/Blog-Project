@@ -31,7 +31,7 @@ var userSchema = new mongoose.Schema({
         default: new Date().toLocaleString()
     },
     contact: {
-        type: Number,
+        type: String,
         required: true
     },
     profileimage: {
