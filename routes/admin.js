@@ -106,7 +106,7 @@ router.get('/settings',redirectLogin, (req,res)=>{
   Settings.findOne({},(err, settings)=>{
     res.render('adminsettings', {settings: settings.post_limit})
   })
- 
+
 });
 
 router.post('/settings', (req,res)=>{
@@ -123,8 +123,8 @@ router.get('/get-posts/:start/:limit', (req,res)=>{
     // if(posts.length !== 'undefined') {
       res.send(posts)
     // }
-    
-    
+
+
     // console.log(array)
    }).sort({_id:-1}).skip(parseInt(req.params.start)).limit(parseInt(req.params.limit))
 })
@@ -139,15 +139,15 @@ router.get("/dashboard",redirectLogin,  (req, res) => {
                                   postLimit});
       // console.log(posts)
     }).sort({_id:-1})/*Sorting From Highest to lowest*/.limit(postLimit)
-   
-      
+
+
   })
-  
-   
-    
-      
-    
-  
+
+
+
+
+
+
 });
 
 //Login Page
@@ -173,7 +173,7 @@ router.post("/login", (req, res) => {
             req.session.userId = user._id;
             req.flash('sucess_msg', 'Login Sucessful')
             res.redirect("/admin/dashboard");
-            
+
           } else {
             req.flash('error_msg', 'Incorrect Username or password')
             res.redirect("/admin/login");
@@ -212,10 +212,10 @@ if(process.env.NODE_ENV !== 'production'){
         var profileimage = req.file.filename;
         //   console.log(profileimage);
       } else {
-  
+
         var profileimage = "noimage.jpg";
       }
-  
+
       const {
         firstname,
         lastname,
@@ -225,9 +225,9 @@ if(process.env.NODE_ENV !== 'production'){
         password,
         password2
       } = req.body;
-  
+
       let errors = [];
-  
+
       //Check required field
       if (
         !firstname ||
@@ -240,7 +240,7 @@ if(process.env.NODE_ENV !== 'production'){
       ) {
         errors.push({ msg: "Please fill in all fields" });
       }
-  
+
       //check password match
       if (password !== password2) {
         errors.push({ msg: "Passwords do not match" });
@@ -249,7 +249,7 @@ if(process.env.NODE_ENV !== 'production'){
       if (password.length < 6) {
         errors.push({ msg: "Password should be atleast 6 characters" });
       }
-  
+
       if (errors.length > 0) {
         res.render("adminReg", {
           errors,
@@ -335,13 +335,15 @@ if(process.env.NODE_ENV !== 'production'){
 router.post("/post", redirectLogin, (req, res) => {
   var post = req.body.post;
   var title = req.body.title;
+  var subtitle = req.body.subtitle;
   var errors = [];
-  if (!title || !post) {
+  if (!title || !subtitle ||!post) {
     res.redirect("/admin/dashboard");
   } else {
 
     var newItem = new Post({
       title: req.body.title,
+      subtitle: req.body.subtitle,
       post: req.body.post
     });
     console.log(newItem);

@@ -6,6 +6,9 @@ var postSchema = new mongoose.Schema({
  	type: String,
  	required: true
  },
+ subtitle : {
+ 	type: String,
+ },
  post: {
     type : String,
     required: true
@@ -18,4 +21,3 @@ comments: [{
 });
 const    Post = mongoose.model('posts',/*collection name */ postSchema);
 module.exports = Post;
-     

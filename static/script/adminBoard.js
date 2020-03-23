@@ -28,8 +28,8 @@
    function getNext() {
 
    start = Number(start) + Number(limit);
-   stat = Number(start) + Number(limit);
-   // console.log(start)
+   
+   
    console.log(limit)
    $.ajax({
      

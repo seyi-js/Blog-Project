@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" type="text/css" href="/static/css/styleA.css" />
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    
-    
+
+
+
+
     <title>BLOG PROJECT</title>
-    
+    <script  src="/static/script/jquery.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
   </head>
   <body>
     <%- include ("./partials/messages") %>
@@ -29,10 +31,10 @@
     <div id= 'editing' type="show">
     <section class="post">
       <div id="posts">
-        <% posts.forEach(function(post){%> 
-        
-          
-         
+        <% posts.forEach(function(post){%>
+
+
+
           <div class="post-element">
             <h1 class="post-title" id="<%=post._id%>"><%- post.title %></h1>
             <article id="<%=post._id%>"><%- post.post %></article>
@@ -45,33 +47,33 @@
             </button>
             <button class="edit" onClick="edit(event)" value="<%=post._id%>">Edit</button>
             <!-- <input id="postId" type="hidden" ></input> -->
-           
+
           </div>
-         
-        
+
+
         <%})%>
-        
+
       </div>
-    
-      
+
+
       <input id="postLimit"  value=" <%=postLimit%>" style="display: none;"></input>
-      
-     
-  
+
+
+
      <div class="next">
       <button class='button' style="float: right;" onClick='getNext();'>Next</button>
      </div>
-      
-      
-     
+
+
+
       <button class='button'  onClick="getPrevious();">Previous</button>
-    
+
    <div class="posts">
 
    </div>
-     
+
     </section>
-   
+
     <section class="form-section">
       <form action="/admin/post" method="POST">
         <label for="title">Title</label>
@@ -83,6 +85,15 @@
           placeholder="Enter Title"
           value="<%= typeof title != 'undefined' ? title : '' %>"
         />
+        <label for="subtitle">Subtitle</label>
+        <input
+          type="text"
+          id="title"
+          name="subtitle"
+          class="form-control"
+          placeholder="Enter Subtitle"
+          value="<%= typeof title != 'undefined' ? title : '' %>"
+        />
         <label for="">Post</label>
         <textarea class="post" name="post" placeholder="Enter Post" value="">
         </textarea>
@@ -92,7 +103,7 @@
       </form>
     </section>
   </div>
-    
+
     <script src="/static/script/adminBoard.js"></script>
 
   </body>

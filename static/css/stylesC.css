@@ -41,7 +41,13 @@ header li a {
 	color:white;
 	text-decoration: none;
 }
-
+/*Profile Image Section*/
+div.profile img {
+	border: 2px solid black;
+	width:70px;
+	border-radius: 100%;
+	margin: 5px;
+}
 /* Table Section */
 table {
 	width: 100%;

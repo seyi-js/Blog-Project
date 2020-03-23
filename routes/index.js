@@ -59,7 +59,7 @@ const findById = (req, res, next) => {
 router.get('/users/userSettings', findById, redirectLogin,(req, res)=> {
   const userId = userdata;
   // console.log(userId.profileimage)
-  
+
   res.render('userSettings',{email: userId.email, contact: userId.contact,   profileImage: imageFolder + userId.profileimage})
 });
 //Users Settings/Edit Profile
@@ -75,12 +75,12 @@ if(req.file){
 if(!email || !contact){
   req.flash('error_msg', 'Please Fill in all Fields');
   res.redirect('/users/usersettings')
- 
+
 } else{
-  
+
   userdata.contact = contact;
   userdata.email = email;
-  userdata.profileimage = profileImage; 
+  userdata.profileimage = profileImage;
   userdata.save();
   res.redirect('/users/dashboard')
 }
@@ -428,15 +428,17 @@ router.get("/users/dashboard", redirectLogin, (req, res) => {
   }
 });
 //Route for comments
-router.post("/comment", findById, redirectLogin, (req, res) => {
-  var postId = req.query.id;
-  var userID = userdata
+router.post("/comment/:userId/:postId", findById, redirectLogin,  (req, res) => {
+  var postId = req.params.postId;
+  var userID = userdata;
   var comment = req.body.comment;
+  // console.log(req.headers)
   // console.log(`user id ${userID.email}`)
 
-
+// var data;
   var newComment = new Comment({
-    comment: req.body.comment
+    comment: req.body.comment,
+    commenter: userID.firstname
   });
   //   console.log()
   Comment.create(newComment, (err, comment) => {
@@ -444,20 +446,25 @@ router.post("/comment", findById, redirectLogin, (req, res) => {
     else {
       var commentId = comment._id;
       // console.log(commentId);
-      Post.findOne({
-        _id: postId
-      }, (err, result) => {
-        if (err) throw err;
-        else {
-          var post = result;
-          // console.log(post);
-          post.comments.push(commentId);
-          post.save();
-        }
+      Post.findOne({_id: postId}).populate('comments').exec((err, result)=>{
+        if(err) throw err;
+        result.comments.push(commentId);
+        result.save();
+        Comment.findOne({_id: commentId}, (err, comment)=>{
+          if(err) throw err;
+          else{
+            var details = [userID, comment];
+            // console.log(details[0].firstname);
+            res.send(details);
+            // console.log(comment);
+          }
+        })
+
       });
+
     }
   });
-  res.redirect("/");
+  // res.send(post);
 });
 
 // Login Handle
@@ -493,7 +500,7 @@ router.post("/users/login", redirectHome, (req, res) => {
 
 //Users Login
 router.get("/users/login", (req, res) => {
-  res.render("userLogin");
+  res.render("userLogin2");
 });
 
 // Users Logout route
@@ -510,7 +517,7 @@ router.get("/users/logout", redirectLogin, (req, res) => {
 
 //Users Registration Route
 router.get("/users/register", (req, res) => {
-  res.render("userReg");
+  res.render("userReg2");
 });
 
 //Registration route
@@ -670,11 +677,8 @@ router.get("/", (req, res) => {
     .exec((err, posts) => {
       if (err) throw err;
       else {
-        // console.log(posts[0].comments); //This access the first post=>first document in the comments array=>The comment
-        // var testing = posts[0].comments;
-        // console.log(testing[0].comment)
-        // console.log(posts)
-        res.render("users", {
+
+        res.render("users2", {
           posts,
           userId,
           postLimit
@@ -687,26 +691,22 @@ router.get("/", (req, res) => {
 
 });
 
-router.get('/users/queryPost', (req, res)=>{
+router.get('/users/queryPost',findById, (req, res)=>{
   var id = req.query.id;
+  // var name = userdata.firstname;
+  // console.log(userdata)
   const {
     userId
   } = req.session; // The Id of the Logged-in user
   Post.findOne({_id: id}).populate('comments').exec((err, post)=>{
-    res.render('post', {post, userId})
+    res.render('post2', {post, userId,})
   })
 });
 
 //Get next Post
 router.get('/users/get-posts/:start/:limit', (req,res)=>{
   Post.find({},(err, posts)=>{
-    // var array = Array.from(posts)
-    // if(posts.length !== 'undefined') {
       res.send(posts)
-    // }
-
-
-    // console.log(array)
    }).sort({_id:-1}).skip(parseInt(req.params.start)).limit(parseInt(req.params.limit))
 })
 
