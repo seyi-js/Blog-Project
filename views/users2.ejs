@@ -23,11 +23,13 @@
 
 </head>
 <style>
-@media (max-width:600px){
+@media (max-width:400px){
 .bt {
-  padding: 10px;
+  padding: 5px;
 }
 }
+
+
 </style>
 
 <body>
@@ -103,9 +105,9 @@
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
 
-
+  <div class="post-preview">
   <% posts.forEach(function(post){%>
-        <div class="post-preview">
+
           <a href="/users/queryPost?id=<%=post._id%>">
             <h2 class="post-title" id="">
 
@@ -124,15 +126,17 @@
             </h3>
           </a>
           <p class="post-meta">Posted by
-            <a href="#">Start Bootstrap</a>
-            on July 8, 2019</p>
-        </div>
+            <a href="#">Admin</a>
+            on July 8, 2019. <a href="#">Comments(<%=post.comments.length%>)</a></p>
+
         <hr>
           <% }) %>
+            </div>
         <!-- Pager -->
         <input id="postLimit" style="display: none;" value=" <%=postLimit%>"></input>
-        <div class="clearfix">
-          <a class="btn btn-primary float-right bt" onClick='getNext();'>Older Posts &rarr;</a>
+        <div class="clearfix" id="clearfix">
+          <a id="next" class="btn btn-primary float-right bt" onClick='getNext();'>Older Posts &rarr;</a>
+          <h6 id="prev"></h6>
           <a class="btn btn-primary bt" onClick='getPrevious();'>  &larr; New Posts</a>
         </div>
 

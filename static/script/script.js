@@ -28,7 +28,7 @@ var limit = Number(data.value);
 
     success: function(response){
 
-      console.log(response)
+      // console.log(response)
 
         renderPost(response);
 
@@ -52,9 +52,10 @@ function getPrevious() {
 
     success: function(response){
 
-      console.log(response);
+      // console.log(response);
 
       renderPost(response);
+      // console.log(response[])
     }
   });
 }
@@ -62,7 +63,7 @@ function getPrevious() {
 //Submit Comment
 function submitComment() {
 
-      console.log(url)
+      // console.log(url)
   var userId = document.getElementById('userId');
   var postId = document.getElementById('postId');
   $.ajax({
@@ -71,7 +72,7 @@ function submitComment() {
      contentType: "application/x-www-form-urlencoded",
     success: function(response){
       renderComment(response)
-      console.log(response)
+      // console.log(response)
     }
   })
 }
@@ -83,11 +84,34 @@ function submitComment() {
 
 
 //Render Post
-function renderPost(post) {
+function renderPost(data) {
+  var post = data[0];
+  var nextPostId = data[1];
+  var postId;
+  var postId2;
+
+  if (nextPostId !== undefined){
+    nextPostId.forEach((id)=>{
+      postId = id._id;
+      // console.log(id._id)
+    })
+  }
+
+  if (post !== undefined){
+    post.forEach((id)=>{
+     postId2 = id._id;
+      // console.log(id._id)
+    })
+  }
+  // console.log(nextPostId)
+
+
+
+
+
+
   if(post.length > 0) {
-
-
-    var html = "";
+var html = "";
 
     for(var a = 0; a < post.length; a++) {
       // posts.forEach(function(post){
@@ -114,11 +138,42 @@ function renderPost(post) {
               html += '</h3>';
           html += '</a>';
           html += '<p class="post-meta">';
-            html += 'Posted by';
+            html += 'Posted by ';
             html += '<a href="#">';
-              html += 'Start Bootstrap</a>';
-          html += 'on July 8, 2019</p>';
+              html += 'Admin</a> ';
+          html += 'on July 8, 2019.';
+          html += '<a href="#">';
+          html += 'Comments';
+          html += '(';
+          html += post[a].comments.length;
+          html += ')';
+          html += '</a>';
+          html += '</p>';
 
+
+       }
+       var next = "";
+       var prev = "";
+       next += '<a id="next" type="button" class="btn btn-primary float-right bt" onClick="getNext();">';
+       next += 'Older Posts &rarr;';
+       next += '</a>';
+
+       prev += '<a id="prev" type="button" class="btn btn-primary  bt" onClick="getPrevious();">';
+       prev +=  '&larr; New Posts';
+       prev += '</a>';
+       var nextbtn = document.getElementById('clearfix');
+       var nextBtn = document.getElementById('next');
+       var previous = document.getElementById('prev');
+
+       if(postId === postId2){
+         console.log('yay')
+         // nextBtn.style.visibility = "hidden";
+         // nextbtn.append(next);
+
+       } else {
+
+           // $('#prev').html(prev)
+           // previous.style.visibility = "hidden";
 
        }
     $('.post-preview').html(html)

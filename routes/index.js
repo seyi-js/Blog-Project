@@ -436,6 +436,9 @@ router.post("/comment/:userId/:postId", findById, redirectLogin,  (req, res) => 
   // console.log(`user id ${userID.email}`)
 
 // var data;
+if(comment === ""){
+  res.redirect('back')
+}else{
   var newComment = new Comment({
     comment: req.body.comment,
     commenter: userID.firstname
@@ -465,6 +468,8 @@ router.post("/comment/:userId/:postId", findById, redirectLogin,  (req, res) => 
     }
   });
   // res.send(post);
+}
+
 });
 
 // Login Handle
@@ -566,7 +571,12 @@ router.post(
         msg: "Please fill in all fields"
       });
     }
-
+    //Check If contact is number 
+    if (typeof contact !== Number){
+      errors.push({
+        msg: "Contact should be a number"
+      });
+    }
     //check password match
     if (password !== password2) {
       errors.push({
@@ -581,7 +591,7 @@ router.post(
     }
 
     if (errors.length > 0) {
-      res.render("userReg", {
+      res.render("userReg2", {
         errors,
         firstname,
         lastname,
@@ -603,7 +613,7 @@ router.post(
           errors.push({
             msg: "Email already Exist"
           });
-          res.render("userReg", {
+          res.render("userReg2", {
             errors,
             firstname,
             lastname,
@@ -705,9 +715,16 @@ router.get('/users/queryPost',findById, (req, res)=>{
 
 //Get next Post
 router.get('/users/get-posts/:start/:limit', (req,res)=>{
-  Post.find({},(err, posts)=>{
+  var data;
+  Post.find({},(err, result)=>{
+    if(err) throw err;
+    data = result;
+  }).sort({_id:1}).limit(1);
+  Post.find({},(err, post)=>{
+    var posts = [post, data];
       res.send(posts)
-   }).sort({_id:-1}).skip(parseInt(req.params.start)).limit(parseInt(req.params.limit))
-})
+   }).sort({_id:-1}).skip(parseInt(req.params.start)).limit(parseInt(req.params.limit));
+
+});
 
 module.exports = router;

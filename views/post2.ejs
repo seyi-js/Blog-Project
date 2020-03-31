@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Clean Blog - Start Bootstrap Theme</title>
+  <title>Tech Blog</title>
 
   <!-- Bootstrap core CSS -->
   <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -22,13 +22,18 @@
   <link href="/static/css/clean-blog.min.css" rel="stylesheet">
 
 </head>
-
+<style>
+#comment-section {
+  /* background: blue; */
+  margin-top: 20px;
+}
+</style>
 <body>
 
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand" href="index.html">All Tech</a>
+      <a class="navbar-brand" href="/">All Tech</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         Menu
         <i class="fas fa-bars"></i>
@@ -89,7 +94,7 @@
 
             <!-- <h2 class="subheading">Problems look mighty small from 150 miles up</h2> -->
             <span class="meta">Posted by
-              <a href="#">Start Bootstrap</a>
+              <a href="#">Admin</a>
               on August 24, 2019</span>
           </div>
         </div>
@@ -111,7 +116,7 @@
   <% post.comments.forEach(function(comment){%>
 
         <div class="media mb-4">
-          <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+          <img class="d-flex mr-3 rounded-circle" src="/static/img/about-bg.jpg" height="40" alt="">
           <div class="media-body">
             <h5 class="mt-0"><%=comment.commenter %></h5>
 

@@ -1,87 +1,147 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
+<html lang="en">
+<head>
+	<title>Sign-Up Form</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="/static/img/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/vendor2/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/vendor2/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/vendor2/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/vendor2/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/css/util.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
 
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <meta name="description" content="">
-      <meta name="author" content="">
+	<div class="limiter">
+    <%- include ("./partials/messages" ) %>
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<!-- <div class="login100-pic js-tilt" data-tilt> -->
+					<!-- <img src="/static/img/img-01.png" alt="IMG"> -->
+				<!-- </div> -->
 
-      <title>Tech Blog</title>
+				<form class="login100-form validate-form" action="/users/register" method="post">
+					<span class="login100-form-title">
+						Sign-Up Form
+					</span>
 
-      <!-- Bootstrap core CSS -->
-      <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+					<div class="wrap-input100 validate-input" data-validate = "First Name is required">
+						<input class="input100" type="text" name="firstname" placeholder="Firstname">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-user" aria-hidden="true"></i>
+						</span>
+					</div>
+					<div class="wrap-input100 validate-input" data-validate = "Last Name is required">
+						<input class="input100" type="text" name="lastname" placeholder="Lastname">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-user" aria-hidden="true"></i>
+						</span>
+					</div>
+					<div class="wrap-input100 validate-input" data-validate = "Date Of Birth Is required">
+						<input class="input100" type="date" name="dateofbirth" placeholder="Date Of Birth">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-calendar" aria-hidden="true"></i>
+						</span>
+					</div>
+					
+					<div class="wrap-input100 validate-input" data-validate = "Gender is required">
+						<input class="input100" type="text" name="gender" list="gender" placeholder="Gender">
+						<datalist id="gender">
+                            
+                            <option value="Male"></option>
+                            <option value="Female"></option>
+                            <option value="Other"></option>
+                        </datalist>
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-intersex" aria-hidden="true"></i>
+						</span>
+					</div>
 
-      <!-- Custom fonts for this template -->
-      <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-      <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-      <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-      <!-- Custom styles for this template -->
-      <link href="/static/css/styles.css" rel="stylesheet">
+					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+						<input class="input100" type="text" name="email" placeholder="Email">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-envelope" aria-hidden="true"></i>
+						</span>
+					</div>
 
-  </head>
-  <body>
-    <!-- <h2>Weekly Coding Challenge #1: Sign in/up Form</h2> -->
-    <div class="container" id="container">
-    	<div class="form-container sign-up-container">
-    		<form action="#">
-    			<h1>Create Account</h1>
-    			<div class="social-container">
-    				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-    				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-    				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-    			</div>
-    			<span>or use your email for registration</span>
-    			<input type="text" placeholder="Name" />
-    			<input type="email" placeholder="Email" />
-    			<input type="password" placeholder="Password" />
-    			<button>Sign Up</button>
-    		</form>
-    	</div>
-    	<div class="form-container sign-in-container">
-    		<form action="#">
-    			<h1>Sign in</h1>
-    			<div class="social-container">
-    				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-    				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-    				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-    			</div>
-    			<span>or use your account</span>
-    			<input type="email" placeholder="Email" />
-    			<input type="password" placeholder="Password" />
-    			<a href="#">Forgot your password?</a>
-    			<button>Sign In</button>
-    		</form>
-    	</div>
-    	<div class="overlay-container">
-    		<div class="overlay">
-    			<div class="overlay-panel overlay-left">
-    				<h1>Welcome Back!</h1>
-    				<p>To keep connected with us please login with your personal info</p>
-    				<button class="ghost" id="signIn">Sign In</button>
-    			</div>
-    			<div class="overlay-panel overlay-right">
-    				<h1>Hello, Friend!</h1>
-    				<p>Enter your personal details and start journey with us</p>
-    				<button class="ghost" id="signUp">Sign Up</button>
-    			</div>
-    		</div>
-    	</div>
-    </div>
+					<div class="wrap-input100 validate-input" data-validate = "Contact Is required">
+						<input class="input100" type="number" name="contact" placeholder="contact">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fas fa-phone " aria-hidden="true"></i>
+						</span>
+					</div>
 
-    <footer>
-    	<!-- <p>
-    		Created with <i class="fa fa-heart"></i> by
-    		<a target="_blank" href="https://florin-pop.com">Florin Pop</a>
-    		- Read how I created this and how you can join the challenge
-    		<a target="_blank" href="https://www.florin-pop.com/blog/2019/03/double-slider-sign-in-up-form/">here</a>.
-    	</p> -->
-    </footer>
-    </body>
-  <!-- Bootstrap core JavaScript -->
-  <script src="/vendor/jquery/jquery.min.js"></script>
-  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- <script src="vendor/jquery/jquery.min.js"></script> -->
-  <script src="/static/script/userReg.js"></script>
 
+					<div class="wrap-input100 validate-input" data-validate = "Password is required">
+						<input class="input100" type="password" name="password" placeholder="Password">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+					</div>
+					<div class="wrap-input100 validate-input" data-validate = "Password is required">
+						<input class="input100" type="password" name="password2" placeholder="Confirm Password">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+					</div>
+
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn">
+							Sign Up
+						</button>
+						<button type="reset" class="btn btn-danger" style="margin-top: 5px;">
+							Reset Form
+						</button>
+					</div>
+					
+
+					<div class="text-center p-t-136">
+						<a class="txt2" href="/users/login">
+							Have an Accout? Login
+							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+						</a>
+					</div>
+				</form>
+			</!-->
+		</div>
+	</div>
+
+
+<!--===============================================================================================-->
+	<script src="/static/vendor2/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/static/vendor2/bootstrap/js/popper.js"></script>
+	<script src="/static/vendor2/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/static/vendor2/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/static/vendor2/tilt/tilt.jquery.min.js"></script>
+	<script >
+		$('.js-tilt').tilt({
+			scale: 1.1
+		})
+	</script>
+<!--===============================================================================================-->
+	<script src="/static/script/main.js"></script>
+
+</body>
 </html>

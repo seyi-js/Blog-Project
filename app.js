@@ -101,7 +101,9 @@ const Post = require('./models/post')
 const Comments = require('./models/comment')
 
 
-
+// Post.findOne({_id: "5e747481e14e665f0038df17"}).populate('comments').exec((err, post)=>{
+//     console.log(post.comments.length)
+// })
 
 
 app.listen(PORT, console.log(`Server started on port ${PORT}`));
